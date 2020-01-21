@@ -6,12 +6,21 @@
     using System.Web;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-
+    using System.Data.Entity.ModelConfiguration.Conventions;
+    using System.Collections;
+    using System.Data.Common;
+    using System.Data;
+    using System.IO;
+    using System.Data.SqlClient;
+   
     public partial class DbHandle : DbContext
     {
-   
 
+
+        public DbHandle():base("lostAndFoundEntities")
+        {
+                
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
