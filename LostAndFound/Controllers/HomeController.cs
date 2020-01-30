@@ -26,7 +26,7 @@ namespace LostAndFound.Controllers
                 id = int.Parse(headCategory);
             else
                 id = 1;//default
-            DB.subCategories.Where(sub => sub.categoryId == id).ToList();
+            DB.subCategories.Where(sub => sub.id == id).ToList();
             //var ls = db.SubCategory.Where(x => x.categoryId == id).Where(x => x.name != "אחר").ToList();
 
             //foreach (var item in ls)

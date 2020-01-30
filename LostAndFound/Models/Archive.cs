@@ -15,66 +15,48 @@ namespace LostAndFound.Models
     [Serializable]
     public partial class Archive
     {
+        public int id { get; set; }
 
-    [Display(Name = "תת ק")]
-    public int idSubCategory { get; set; }
-  
+        [Display(Name = "תת קטגוריה")]
+        public virtual SubCategory subCategory { get; set; }
 
+        [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "הזן תאור בין 2-50 תווים")]
+        [Required]
+        [Display(Name = "תאור")]
+        public string description { get; set; }
 
-    [Display(Name = "היכן נמצא")]
-    public Nullable<int> idPlace { get; set; }
+        [Display(Name = "תמונה")]
+        public string picture { get; set; }
 
+        [Display(Name = "היכן נמצא")]
+        public virtual Location location { get; set; }
 
+        [Display(Name = "תאריך מציאה")]
+        public System.DateTime dateFound { get; set; }
 
-    [Display(Name = "תאריך")]
-    public System.DateTime dateFound { get; set; }
+        [Display(Name = "תאריך עברי")]
+        public string hebrewDate { get; set; }
 
+        [StringLength(maximumLength: 20)]
+        [Display(Name = "הערות")]
+        public string notes { get; set; }
 
+        [Required]
+        [Display(Name = "שם המוצא")]
+        public string finderName { get; set; }
 
+        [Required]
+        [RegularExpression(@"[0-9]{7,10}",
+                    ErrorMessage = "הזן מספר טלפון תקין")]
+        [Display(Name = "טלפון")]
+        public string cellphone { get; set; }
 
-    [StringLength(maximumLength: 50, MinimumLength = 2, ErrorMessage = "הכניסי תאור בין 2-50 תווים")]
-    [Required]
-    [Display(Name = "תאור")]
-    public string description { get; set; }
-
-
-
-
-    [StringLength(maximumLength: 20)]
-    [Display(Name = "הערות")]
-    public string notes { get; set; }
-
-
-
-    [StringLength(maximumLength: 10)]
-    [Display(Name = "כיתה")]
-    public string myclass { get; set; }
-
-
-    [Required]
-    [RegularExpression(@"[0-9]{7,10}",
-                ErrorMessage = "הקישי מספר טלפון תקין")]
-    [Display(Name = "טלפון")]
-    public string cellphone { get; set; }
-
-
-
-    [RegularExpression(@"[0-9]{7,10}",
-                ErrorMessage = "הקישי מספר טלפון תקין")]/*@"^\(?([0-9]{2,3})\)?[-]?([0-9]{3})[-]?([0-9]{4})$"*/
-    [Display(Name = "טלפון נוסף")]
-    public string tel2 { get; set; }
-    public int id { get; set; }
-
-
-    [Display(Name = "תאריך עברי")]
-    public string hebrewDate { get; set; }
-
-
-    [Required]
-    [Display(Name = "שם")]
-    public string name { get; set; }
-
-    public virtual Location location { get; set; }
-    public virtual SubCategory subCategory { get; set; }
-}
+        [Required]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
+                    ErrorMessage = "הזן כתובת מייל תקינה")]
+        [Display(Name = "כתובת מייל")]
+        public string email { get; set; }
+       
+        
+    }
 }

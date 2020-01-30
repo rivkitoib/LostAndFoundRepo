@@ -14,10 +14,9 @@ namespace LostAndFound.Models
         }
     
         public int id { get; set; }
-        public int categoryId { get; set; }
         public string name { get; set; }
     
-        public virtual HeadCategory Categories { get; set; }
+        public virtual HeadCategory headCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Find> finds { get; set; }
     }
