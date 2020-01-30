@@ -21,12 +21,6 @@
         {
                 
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-
-
 
 
         public virtual DbSet<HeadCategory> headCategories { get; set; }
