@@ -4,80 +4,128 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+
 
 <p>
     @Html.ActionLink("Create New", "CreateFind")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.subCategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.locationId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.dateFound)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cellphone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tel2)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.hebrewDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th></th>
-    </tr>
-@if (Model != null)
+<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
+    <label>קטגוריה</label>
+    <select id="category" name="category">
+
+        <option>הכל</option>
+        @foreach (var item in ViewBag.category)
+        {
+            <option>@item.Name</option>
+        }
+    </select>
+</form>
+@using (Ajax.BeginForm("Search", new AjaxOptions()
 {
-foreach (var item in Model)
+    UpdateTargetId = "updateTable",
+    HttpMethod = "get",
+    InsertionMode = InsertionMode.Replace
+
+}))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.subCategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.locationId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dateFound)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cellphone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tel2)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hebrewDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.id })
-        </td>
-    </tr>
+    <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
+
+    <label>תת קטגוריה</label>
+    <select id="subCategories" name="subCategory">
+        <option>הכל</option>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <option>@item</option>
+            }
+
+        }
+    </select>
+
+    <label>מקום</label>
+    <select id="place" name="place">
+        <option>הכל</option>
+        @foreach (var item in ViewBag.place)
+        {
+            <option>@item.PlaceOrEvent</option>
+        }
+    </select>
+    <label>החל מ</label>
+    <input id="fromDate" type="date" name="fromDate" value="2019-01-01" />
+    <label>עד</label>
+    <input id="dateNow" type="date" name="toDate" />
+    <label>טקסט חופשי</label>
+    <input type="text" name="text" />
+    <input type="submit" value="סנן" />
 }
-}
-</table>
+<h2>לוח מציאות</h2>
+<div id="updateTable">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.subCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateFound)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.notes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.finderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cellphone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.tbl)
+        {
+            <tr>
+                <td>
+                    @item.subcategoryname
+                </td>
+                <td>
+                    @item.description
+                </td>
+                <td>
+                    ""
+                </td>
+                <td>
+                    @item.PlaceOrEvent
+                </td>
+                <td>
+                    @item.date
+                </td>
+
+                <td>
+                    @item.notes
+                </td>
+                <td>
+                    @item.name
+                </td>
+                <td>
+                    @item.cellphone
+                </td>
+                <td>
+                    @item.email
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>

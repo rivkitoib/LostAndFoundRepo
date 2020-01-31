@@ -1,0 +1,71 @@
+﻿@model IEnumerable<LostAndFound.Models.Find>
+
+<table class="table">
+    <tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.subCategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateFound)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.finderName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cellphone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th></th>
+    </tr>
+    </tr>
+
+    @foreach (var item in ViewBag.tbl)
+    {
+        <tr>
+            <td>
+                @item.subcategoryname
+            </td>
+            <td>
+                @item.description
+            </td>
+            <td>
+                ""
+            </td>
+            <td>
+                @item.PlaceOrEvent
+            </td>
+            <td>
+                @item.date
+            </td>
+
+            <td>
+                @item.notes
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.cellphone
+            </td>
+            <td>
+                @item.email
+            </td>
+        </tr>
+    }
+
+</table>
