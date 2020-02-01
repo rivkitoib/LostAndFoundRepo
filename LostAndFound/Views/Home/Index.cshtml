@@ -3,11 +3,36 @@
 @{
     ViewBag.Title = "Index";
 }
+<script>  
+    $(document).ready(function () {
+        $("#category").change(function () {
+            $("#hiddenMainCategory").val($("#category").val());
+            $("#categoryForm").submit();
+        });
+        var theAllOption = ($("<option>הכל</option>"));
+        $("#categoryForm").submit(function (event) {
+            event.preventDefault();
+            var target = $(this);
+
+            $.ajax({
+                url: target.attr("action"),
+                data: target.serialize(),
+                success: function (data) {
+
+                    $("#subCategories").empty().append(theAllOption);
+                    $.each(data, function (i, value) {
+                        $("#subCategories").append($("<option>" + JSON.stringify(value).split('"')[1] + "</option>"));
+                    });
+                }
 
 
+            });
 
+        });
+    }
+    </script>
 <p>
-    @Html.ActionLink("Create New", "CreateFind")
+    @Html.ActionLink("הוסף מציאה", "CreateFind")
 </p>
 <form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
     <label>קטגוריה</label>
@@ -52,7 +77,7 @@
         }
     </select>
     <label>החל מ</label>
-    <input id="fromDate" type="date" name="fromDate" value="2019-01-01" />
+    <input id="fromDate" type="date" name="fromDate" />
     <label>עד</label>
     <input id="dateNow" type="date" name="toDate" />
     <label>טקסט חופשי</label>

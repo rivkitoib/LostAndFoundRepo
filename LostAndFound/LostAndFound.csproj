@@ -142,6 +142,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\View.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
