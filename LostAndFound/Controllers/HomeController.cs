@@ -13,75 +13,76 @@ namespace LostAndFound.Controllers
         DbHandle DB = new DbHandle();
         public ActionResult Index(string category)
         {
-            ViewBag.category = DB.headCategories.ToList();
-            ViewBag.place = DB.locations.ToList();
+            //ViewBag.category = DB.headCategories.ToList();
+            //ViewBag.location = DB.locations.ToList();
 
-            //ViewBag.category2.First(x => x.Id == item.idCategory).Name;
-            if (category == null)
-            {
-                var t = (from f in DB.finds.ToList()
-                         join sc in DB.subCategories.ToList()
-                         on f.subCategory.id equals sc.id
-                         join p in DB.locations.ToList()
-                         on f.location.Id equals p.Id
-                         join c in DB.headCategories.ToList()
-                         on sc.headCategory.Id equals c.Id
+            ////ViewBag.category2.First(x => x.Id == item.idCategory).Name;
+            //if (category == null)
+            //{
+            //    var t = (from f in DB.finds.ToList()
+            //             join sc in DB.subCategories.ToList()
+            //             on f.subCategory.id equals sc.id
+            //             join p in DB.locations.ToList()
+            //             on f.location.Id equals p.Id
+            //             join c in DB.headCategories.ToList()
+            //             on sc.headCategory.Id equals c.Id
 
-                         select new View()
-                         {
-                             id = f.id,
-                             idSubCategory = f.subCategory.id,
-                             hebrewDate = f.hebrewDate,
-                             name = f.finderName,
-                             email = f.email,
-                             notes = f.notes,
-                             date = f.dateFound.ToString(),
-                             description = f.description,
-                             cellphone = f.cellphone,
-                             subcategoryname = sc.name,
-                             categoryId = sc.headCategory.Id,
-                             categoryName = c.Name,
-                             PlaceOrEvent = p.PlaceOrEvent
-                         });
-                ViewBag.tbl = t.ToList();
+            //             select new View()
+            //             {
+            //                 id = f.id,
+            //                 idSubCategory = f.subCategory.id,
+            //                 hebrewDate = f.hebrewDate,
+            //                 name = f.finderName,
+            //                 email = f.email,
+            //                 notes = f.notes,
+            //                 date = f.dateFound.ToString(),
+            //                 description = f.description,
+            //                 cellphone = f.cellphone,
+            //                 subcategoryname = sc.name,
+            //                 categoryId = sc.headCategory.Id,
+            //                 categoryName = c.Name,
+            //                 PlaceOrEvent = p.PlaceOrEvent
+            //             });
+            //    ViewBag.tbl = t.ToList();
 
-                return View();
-            }
+            //    return View();
+            //}
 
-            List<string> lsName = new List<string>();
-            if (category != "הכל")
-            {
-                int id = DB.headCategories.First(x => x.Name == category).Id;
-                var ls = DB.subCategories.Where(x => x.headCategory.Id == id).ToList();
+            //List<string> lsName = new List<string>();
+            //if (category != "הכל")
+            //{
+            //    int id = DB.headCategories.First(x => x.Name == category).Id;
+            //    var ls = DB.subCategories.Where(x => x.headCategory.Id == id).ToList();
 
-                foreach (var item in ls)
-                {
-                    lsName.Add(item.name);
-                }
-            }
-            return Json(lsName, JsonRequestBehavior.AllowGet);
+            //    foreach (var item in ls)
+            //    {
+            //        lsName.Add(item.name);
+            //    }
+            //}
+            //return Json(lsName, JsonRequestBehavior.AllowGet);
+            return View();
         }
         [HttpGet]
         public ActionResult CreateFind(string headCategory)
         {
-            ViewBag.headCategories = DB.headCategories.ToList();
-            ViewBag.locations = DB.locations.ToList();
-            //List<string> lsName = new List<string>();
-            int id;
-            if (headCategory != null)
-                id = int.Parse(headCategory);
-            else
-                id = 1;//default
-            DB.subCategories.Where(sub => sub.id == id).ToList();
-            //var ls = DB.SubCategory.Where(x => x.categoryId == id).Where(x => x.name != "אחר").ToList();
+            //ViewBag.headCategories = DB.headCategories.ToList();
+            //ViewBag.locations = DB.locations.ToList();
+            ////List<string> lsName = new List<string>();
+            //int id;
+            //if (headCategory != null)
+            //    id = int.Parse(headCategory);
+            //else
+            //    id = 1;//default
+            //DB.subCategories.Where(sub => sub.id == id).ToList();
+            ////var ls = DB.SubCategory.Where(x => x.categoryId == id).Where(x => x.name != "אחר").ToList();
 
-            //foreach (var item in ls)
-            //{
-            //    lsName.Add(item.name);
-            //}
-            //ViewBag.sub = lsName;
-            if (headCategory == null)
-                return View();
+            ////foreach (var item in ls)
+            ////{
+            ////    lsName.Add(item.name);
+            ////}
+            ////ViewBag.sub = lsName;
+            //if (headCategory == null)
+            //    return View();
             //return Json(lsName, JsonRequestBehavior.AllowGet);
             return View();
 

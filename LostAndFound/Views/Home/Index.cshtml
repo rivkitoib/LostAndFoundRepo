@@ -34,17 +34,18 @@
 <p>
     @Html.ActionLink("הוסף מציאה", "CreateFind")
 </p>
-<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
+@*<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
     <label>קטגוריה</label>
     <select id="category" name="category">
 
         <option>הכל</option>
-        @foreach (var item in ViewBag.category)
+        @if(ViewBag.category != null)  {
+        foreach (var item in ViewBag.category)
         {
             <option>@item.Name</option>
-        }
+        }}
     </select>
-</form>
+</form>*@
 @using (Ajax.BeginForm("Search", new AjaxOptions()
 {
     UpdateTargetId = "updateTable",
@@ -71,9 +72,12 @@
     <label>מקום</label>
     <select id="place" name="place">
         <option>הכל</option>
-        @foreach (var item in ViewBag.place)
+        @if (ViewBag.location!= null)
         {
+            foreach (var item in ViewBag.location)
+            {
             <option>@item.PlaceOrEvent</option>
+            }
         }
     </select>
     <label>החל מ</label>
@@ -117,9 +121,9 @@
             </th>
             <th></th>
         </tr>
-
-        @foreach (var item in ViewBag.tbl)
-        {
+@if(ViewBag.tbl != null)
+{foreach (var item in ViewBag.tbl)
+    {
             <tr>
                 <td>
                     @item.subcategoryname
@@ -150,7 +154,7 @@
                     @item.email
                 </td>
             </tr>
-
-        }
+    }
+}
     </table>
 </div>
