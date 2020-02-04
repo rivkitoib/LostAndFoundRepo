@@ -13,7 +13,6 @@
         $("#categoryForm").submit(function (event) {
             event.preventDefault();
             var target = $(this);
-
             $.ajax({
                 url: target.attr("action"),
                 data: target.serialize(),
@@ -24,10 +23,7 @@
                         $("#subCategories").append($("<option>" + JSON.stringify(value).split('"')[1] + "</option>"));
                     });
                 }
-
-
             });
-
         });
     }
     </script>
@@ -52,7 +48,7 @@
     HttpMethod = "get",
     InsertionMode = InsertionMode.Replace
 
-}))
+})) 
 {
     <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
 

@@ -13,8 +13,8 @@ namespace LostAndFound.Controllers
         DbHandle DB = new DbHandle();
         public ActionResult Index(string category)
         {
-            //ViewBag.category = DB.headCategories.ToList();
-            //ViewBag.location = DB.locations.ToList();
+            ViewBag.category = DB.headCategories.ToList();
+            ViewBag.location = DB.locations.ToList();
 
             ////ViewBag.category2.First(x => x.Id == item.idCategory).Name;
             //if (category == null)
@@ -65,7 +65,7 @@ namespace LostAndFound.Controllers
         [HttpGet]
         public ActionResult CreateFind(string headCategory)
         {
-            //ViewBag.headCategories = DB.headCategories.ToList();
+            ViewBag.headCategories = DB.headCategories.ToList();
             //ViewBag.locations = DB.locations.ToList();
             ////List<string> lsName = new List<string>();
             //int id;

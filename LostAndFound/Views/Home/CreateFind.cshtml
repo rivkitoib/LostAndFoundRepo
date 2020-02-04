@@ -3,14 +3,29 @@
 @{
     ViewBag.Title = "CreateFind";
 }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript"></script>
 <h2>CreateFind</h2>
+<form id="categoryForm" action="@Url.Action("CreateFind", "Home")">
 
-
-@using (Html.BeginForm()) 
+    <hr />
+    <label>קטגוריה</label>
+    <select id="category" name="headCategory">
+        @if (ViewBag.headCategories != null)
+        {
+            foreach (var item in ViewBag.headCategories)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        }
+    </select>
+</form>
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Find</h4>
         <hr />
