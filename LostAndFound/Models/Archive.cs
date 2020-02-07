@@ -15,6 +15,7 @@ namespace LostAndFound.Models
     [Serializable]
     public partial class Archive
     {
+
         public int id { get; set; }
 
         [Display(Name = "תת קטגוריה")]
@@ -55,8 +56,9 @@ namespace LostAndFound.Models
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
                     ErrorMessage = "הזן כתובת מייל תקינה")]
         [Display(Name = "כתובת מייל")]
-        public string email { get; set; }
-       
+        public string email1 { get; set; }
         
+        [Display(Name = "האם הושב")]
+        public string status { get; set; }
     }
 }

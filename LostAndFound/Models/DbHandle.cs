@@ -12,16 +12,16 @@
     using System.Data;
     using System.IO;
     using System.Data.SqlClient;
-   
+
     public partial class DbHandle : DbContext
     {
 
 
-        public DbHandle():base("lostAndFoundEntities")
+        public DbHandle():base("VeHashevotaEntities")
         {
-                
-        }
 
+        }
+        
 
 
 
@@ -30,6 +30,7 @@
         public virtual DbSet<Location> locations { get; set; }
         public virtual DbSet<SubCategory> subCategories { get; set; }
         public virtual DbSet<Archive> archive { get; set; }
+
     }
 
 }

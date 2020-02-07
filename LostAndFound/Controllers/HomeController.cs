@@ -93,79 +93,66 @@ namespace LostAndFound.Controllers
             return View();
         }
 
-        public ActionResult Search(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory)
+        [HttpGet]
+        public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory, Boolean searchArchive)
         {
+            var findsFilterQuery = DB.finds.Select(x => x);
 
-            var findsList = DB.finds.Where(x => x != null);
-            int helpId;
+            if (searchArchive)
+            {
+                findsFilterQuery = findsFilterQuery.Union(DB.archive.Select(x => Find.convertArciveToFind(x)));
+            }
+
             //sorting by place
             if (place != "הכל")
             {
-                helpId = DB.locations.First(x => x.PlaceOrEvent == place).Id;
-                findsList = findsList.Where(x => x.location.Id == helpId);
+                findsFilterQuery = findsFilterQuery.Where(x => x.location.PlaceOrEvent.Equals(place));
             }
             //sorting by category or subCategory
             if (hiddenCategory != null && hiddenCategory != "הכל")
             {
                 if (subCategory != "הכל")
                 {
-                    helpId = DB.subCategories.First(x => x.name == subCategory).id;
-                    findsList = findsList.Where(x => x.subCategory.id == helpId);
+                    findsFilterQuery = findsFilterQuery.Where(x => x.subCategory.name.Equals(subCategory));
                 }
                 else
                 {
-                    helpId = DB.headCategories.First(x => x.Name == hiddenCategory).Id;
-                    var ITSsubCategories = DB.subCategories.Where(x => x.headCategory.Id == helpId);
+                    var subCategoriesFilter = DB.subCategories.Where(x => x.headCategory.Name.Equals(hiddenCategory));
 
-                    findsList = from a in ITSsubCategories
-                                join b in findsList
-                                on a.id equals b.subCategory.id
-                                select b;
+                    findsFilterQuery = from a in subCategoriesFilter
+                                       join b in findsFilterQuery
+                                       on a.id equals b.subCategory.id
+                                       select b;
                 }
             }
             //sorting by date
-            findsList = findsList.Where(x => DateTime.Compare(x.dateFound, fromDate) >= 0);
-            findsList = findsList.Where(x => DateTime.Compare(toDate, x.dateFound) >= 0);
-            //findsList = findsList.Where(x => x.dateFound.Year >= fromDate.Year && x.dateFound.Month >= fromDate.Month && x.dateFound.Day >= fromDate.Day);
-            //findsList = findsList.Where(x => x.dateFound.Year <= toDate.Year && x.dateFound.Month <= toDate.Month && x.dateFound.Day <= toDate.Day);
-            // findsList = findsList.Where(x => ==true);
-            // findsList = findsList.Where(x => IsGreaterOrEqual(toDate,x.dateFound)==true);
-            //findsList = from a in findsList
-            //            where IsGreaterOrEqual(a.dateFound, fromDate)
-            //            select a;
-            //findsList = from a in findsList
-            //            where IsGreaterOrEqual(toDate, a.dateFound)
-            //            select a;
+            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(x.dateFound, fromDate) >= 0);
+            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(toDate, x.dateFound) >= 0);
+
             //sorting by text
             if (text != "")
             {
-                findsList = findsList.Where(x => x.description.Contains(text) || x.notes.Contains(text));
+                findsFilterQuery = findsFilterQuery.Where(x => x.description.Contains(text) || x.notes.Contains(text));
             }
-            var t = (from f in DB.finds.ToList()
-                     join sc in DB.subCategories.ToList()
-                     on f.subCategory.id equals sc.id
-                     join p in DB.locations.ToList()
-                     on f.location.Id equals p.Id
-                     join c in DB.headCategories.ToList()
-                     on sc.headCategory.Id equals c.Id
-                     select new View()
-                     {
-                         id = f.id,
-                         idSubCategory = f.subCategory.id,
-                         hebrewDate = f.hebrewDate,
-                         name = f.finderName,
-                         email = f.email,
-                         notes = f.notes,
-                         date = f.dateFound.ToString(),
-                         description = f.description,
-                         cellphone = f.cellphone,
-                         subcategoryname = sc.name,
-                         categoryId = sc.headCategory.Id,
-                         categoryName = c.Name,
-                         PlaceOrEvent = p.PlaceOrEvent
-                     });
-            ViewBag.tbl = t.ToList();
 
+            var filteredFinds = findsFilterQuery.Select(f => new View()
+            {
+                id = f.id,
+                idSubCategory = f.subCategory.id,
+                hebrewDate = f.hebrewDate,
+                name = f.finderName,
+                email = f.email,
+                notes = f.notes,
+                date = f.dateFound.ToString(),
+                description = f.description,
+                cellphone = f.cellphone,
+                subcategoryname = f.subCategory.name,
+                categoryId = f.subCategory.headCategory.Id,
+                categoryName = f.subCategory.headCategory.Name,
+                PlaceOrEvent = f.location.PlaceOrEvent
+            });
+            
+            ViewBag.tbl = filteredFinds.ToList();
 
             return PartialView();
         }

@@ -57,6 +57,21 @@ namespace LostAndFound.Models
         [Display(Name = "כתובת מייל")]
         public string email { get; set; }
 
-       
+        public static Find convertArciveToFind(Archive arcive)
+        {
+            Find find = new Find();
+            find.hebrewDate = arcive.hebrewDate;
+            find.id = arcive.id;
+            find.notes = arcive.notes;
+            find.location = arcive.location;
+            find.subCategory = arcive.subCategory;
+            find.cellphone = arcive.cellphone;
+            find.dateFound = arcive.dateFound;
+            find.email = arcive.email1;
+            find.finderName = arcive.finderName;
+            find.picture = arcive.picture;
+            
+            return find;
+        }
     }
 }
