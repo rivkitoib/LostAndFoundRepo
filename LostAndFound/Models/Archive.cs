@@ -35,9 +35,6 @@ namespace LostAndFound.Models
         [Display(Name = "תאריך מציאה")]
         public System.DateTime dateFound { get; set; }
 
-        [Display(Name = "תאריך עברי")]
-        public string hebrewDate { get; set; }
-
         [StringLength(maximumLength: 20)]
         [Display(Name = "הערות")]
         public string notes { get; set; }
@@ -56,9 +53,11 @@ namespace LostAndFound.Models
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
                     ErrorMessage = "הזן כתובת מייל תקינה")]
         [Display(Name = "כתובת מייל")]
-        public string email1 { get; set; }
+        public string email { get; set; }
         
         [Display(Name = "האם הושב")]
-        public string status { get; set; }
+        public bool status { get; set; }
+        [Display(Name = "תאריך השבה")]
+        public System.DateTime dateStatus { get; set; }
     }
 }

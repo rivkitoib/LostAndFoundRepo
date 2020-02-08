@@ -31,7 +31,6 @@ namespace LostAndFound.Controllers
                          {
                              id = f.id,
                              idSubCategory = f.subCategory.id,
-                             hebrewDate = f.hebrewDate,
                              name = f.finderName,
                              email = f.email,
                              notes = f.notes,
@@ -42,6 +41,7 @@ namespace LostAndFound.Controllers
                              categoryId = sc.headCategory.Id,
                              categoryName = c.Name,
                              PlaceOrEvent = p.PlaceOrEvent
+                             
                          });
                 ViewBag.tbl = t.ToList();
 
@@ -94,14 +94,19 @@ namespace LostAndFound.Controllers
         }
 
         [HttpGet]
-        public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory, Boolean searchArchive)
+        public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory,bool searchArchive = false)
         {
-            var findsFilterQuery = DB.finds.Select(x => x);
+            var findsFilterQuery = DB.finds.ToList().Select(x => x);
 
             if (searchArchive)
             {
-                findsFilterQuery = findsFilterQuery.Union(DB.archive.Select(x => Find.convertArciveToFind(x)));
+                var archives = DB.archive.ToList();
+                findsFilterQuery = findsFilterQuery.Union(archives.Select(x => Find.convertarchiveToFind(x)));
+                // findsFilterQuery = findsFilterQuery.Union(DB.finds.Select(x => (x)));
             }
+
+            var c = findsFilterQuery.Select(x => x).ToList();
+
 
             //sorting by place
             if (place != "הכל")
@@ -126,8 +131,8 @@ namespace LostAndFound.Controllers
                 }
             }
             //sorting by date
-            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(x.dateFound, fromDate) >= 0);
-            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(toDate, x.dateFound) >= 0);
+            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(x.dateFound.Date, fromDate.Date) >= 0);
+            findsFilterQuery = findsFilterQuery.Where(x => DateTime.Compare(toDate.Date, x.dateFound.Date) >= 0);
 
             //sorting by text
             if (text != "")
@@ -135,11 +140,11 @@ namespace LostAndFound.Controllers
                 findsFilterQuery = findsFilterQuery.Where(x => x.description.Contains(text) || x.notes.Contains(text));
             }
 
+
             var filteredFinds = findsFilterQuery.Select(f => new View()
             {
                 id = f.id,
                 idSubCategory = f.subCategory.id,
-                hebrewDate = f.hebrewDate,
                 name = f.finderName,
                 email = f.email,
                 notes = f.notes,

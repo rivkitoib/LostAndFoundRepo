@@ -34,9 +34,6 @@ namespace LostAndFound.Models
         [Display(Name = "תאריך מציאה")]
         public System.DateTime dateFound { get; set; }
 
-        [Display(Name = "תאריך עברי")]
-        public string hebrewDate { get; set; }
-
         [StringLength(maximumLength: 20)]
         [Display(Name = "הערות")]
         public string notes { get; set; }
@@ -56,21 +53,19 @@ namespace LostAndFound.Models
                     ErrorMessage = "הזן כתובת מייל תקינה")]
         [Display(Name = "כתובת מייל")]
         public string email { get; set; }
-
-        public static Find convertArciveToFind(Archive arcive)
+   
+        public static Find convertarchiveToFind(Archive archive)
         {
             Find find = new Find();
-            find.hebrewDate = arcive.hebrewDate;
-            find.id = arcive.id;
-            find.notes = arcive.notes;
-            find.location = arcive.location;
-            find.subCategory = arcive.subCategory;
-            find.cellphone = arcive.cellphone;
-            find.dateFound = arcive.dateFound;
-            find.email = arcive.email1;
-            find.finderName = arcive.finderName;
-            find.picture = arcive.picture;
-            
+            find.notes = archive.notes;
+            find.id = archive.id;
+            find.location = archive.location;
+            find.subCategory = archive.subCategory;
+            find.cellphone = archive.cellphone;
+            find.dateFound = archive.dateFound;
+            find.email = archive.email;
+            find.finderName = archive.finderName;
+            find.picture = archive.picture;
             return find;
         }
     }
