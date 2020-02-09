@@ -5,8 +5,8 @@
 }
 <script type="text/javascript" src="@Url.Content("/Scripts/jquery.min.js")"></script>
 @*<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.unobtrusive.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>*@
 <script type="text/javascript" src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 
 <style>
@@ -20,11 +20,14 @@
     .active {
         display: inline-block
     }
+
+    .hiddenRow {
+        padding: 0 !important;
+    }
 </style>
 <script>
 
     $(document).ready(function () {
-        debugger;
     dateDefaultValues = function () {
         year = @DateTime.Now.Year;
         month = @DateTime.Now.Month;
@@ -64,13 +67,20 @@
 
 
         });
+        $('.accordian-body').on('show.bs.collapse', function () {
+    $(this).closest("table")
+        .find(".collapse.in")
+        .not(this)
+        .collapse('toggle')
+})
+
 
     });
-    $(function () {
-        $("table tr.view").on("click", function () {
-            $(this).next(".fold").toggleClass("active");
-        });
-    })
+    //$(function () {
+    //    $("table tr.view").on("click", function () {
+    //        $(this).next(".fold").toggleClass("active");
+    //    });
+    //})
 });
 </script>
 <p>
@@ -132,7 +142,7 @@
 <h2>לוח מציאות</h2>
 
 <div id="updateTable">
-    <table class="table">
+    <table class="table table-condensed" style="border-collapse:collapse;">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.subCategory)
@@ -149,23 +159,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.dateFound)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.finderName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cellphone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
+           
             <th></th>
         </tr>
         @foreach (var item in ViewBag.tbl)
         {
-            <tr class="clickableAccordion">
+            <tr data-toggle="collapse" data-target="@("#demo"+ViewBag.tbl.IndexOf(item))" class="accordion-toggle">
                 <td>
                     @item.subcategoryname
                 </td>
@@ -182,20 +181,45 @@
                     @item.date
                 </td>
 
-                <td>
-                    @item.notes
-                </td>
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.cellphone
-                </td>
-                <td>
-                    @item.email
-                </td>
+
             </tr>
-            //<tr class="fold">accordion</tr>
+            <tr data-toggle="collapse" data-target="@("#demo"+ ViewBag.tbl.IndexOf(item))" class="accordion-toggle">
+                <td colspan="6" class="hiddenRow">
+                    <div class="accordian-body collapse" id="@("demo"+ ViewBag.tbl.IndexOf(item))">
+                        <table>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.notes)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.finderName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.cellphone)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.email)
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @item.notes
+                                </td>
+                                <td>
+                                    @item.name
+                                </td>
+                                <td>
+                                    @item.cellphone
+                                </td>
+                                <td>
+                                    @item.email
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+
+            </tr>
 
         }
     </table>
