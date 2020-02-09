@@ -10,7 +10,6 @@ namespace LostAndFound.Models
     {
         public int id { get; set; }
         public int idSubCategory { get; set; }
-        public string hebrewDate { get; set; }
         public string date { get; set; }
         public string PlaceOrEvent { get; set; }
         public string name { get; set; }

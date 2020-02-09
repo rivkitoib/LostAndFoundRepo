@@ -3,52 +3,97 @@
 @{
     ViewBag.Title = "Index";
 }
-<script>  
-    $(document).ready(function () {
-        $("#category").change(function () {
-            $("#hiddenMainCategory").val($("#category").val());
-            $("#categoryForm").submit();
-        });
-        var theAllOption = ($("<option>הכל</option>"));
-        $("#categoryForm").submit(function (event) {
-            event.preventDefault();
-            var target = $(this);
-            $.ajax({
-                url: target.attr("action"),
-                data: target.serialize(),
-                success: function (data) {
 
-                    $("#subCategories").empty().append(theAllOption);
-                    $.each(data, function (i, value) {
-                        $("#subCategories").append($("<option>" + JSON.stringify(value).split('"')[1] + "</option>"));
-                    });
-                }
-            });
-        });
+<link href="~/Scripts/font-awesome.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+
+<style>
+    .fold {
+        padding: 0 18px;
+        display: none;
+        background-color: white;
+        overflow: hidden;
     }
-    </script>
+
+    .active {
+        display: inline-block
+    }
+</style>
+<script src="~/Scripts/searchPage.js"></script>
+<script>
+    
+$(document).ready(function () {
+    dateDefaultValues = function () {
+        year = @DateTime.Now.Year;
+        month = @DateTime.Now.Month;
+        if (month < 10)
+            month = '0' + month;
+        day = @DateTime.Now.Day;
+        if (day < 10)
+            day = '0' + day;
+        date = year + "-" + month + "-" + day;
+
+        $("#dateNow").val(date);
+
+        date = (year - 1) + "-" + month + "-" + day;
+        $("#fromDate").val(date);
+    }
+    dateDefaultValues();
+
+    $("#category").change(function () {
+        $("#hiddenMainCategory").val($("#category").val());
+        $("#categoryForm").submit();
+    });
+    var theAllOption = ($("<option>הכל</option>"));
+    $("#categoryForm").submit(function (event) {
+        event.preventDefault();
+        var target = $(this);
+
+        $.ajax({
+            url: target.attr("action"),
+            data: target.serialize(),
+            success: function (data) {
+
+                $("#subCategories").empty().append(theAllOption);
+                $.each(data, function (i, value) {
+                    $("#subCategories").append($("<option>" + JSON.stringify(value).split('"')[1] + "</option>"));
+                });
+            }
+
+
+        });
+
+    });
+    $(function () {
+        $("table tr.view").on("click", function () {
+            $(this).next(".fold").toggleClass("active");
+        });
+    })
+});
+</script>
 <p>
-    @Html.ActionLink("הוסף מציאה", "CreateFind")
+   
+    @Html.ActionLink("הוסף מציאה", "CreateFind","Create")
 </p>
-@*<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
+<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
     <label>קטגוריה</label>
     <select id="category" name="category">
 
         <option>הכל</option>
-        @if(ViewBag.category != null)  {
-        foreach (var item in ViewBag.category)
+        @foreach (var item in ViewBag.category)
         {
             <option>@item.Name</option>
-        }}
+        }
     </select>
-</form>*@
-@using (Ajax.BeginForm("Search", new AjaxOptions()
+</form>
+@using (Ajax.BeginForm("SearchFinds", new AjaxOptions()
 {
     UpdateTargetId = "updateTable",
-    HttpMethod = "get",
+    HttpMethod = "GET",
     InsertionMode = InsertionMode.Replace
 
-})) 
+}))
 {
     <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
 
@@ -68,23 +113,23 @@
     <label>מקום</label>
     <select id="place" name="place">
         <option>הכל</option>
-        @if (ViewBag.location!= null)
+        @foreach (var item in ViewBag.place)
         {
-            foreach (var item in ViewBag.location)
-            {
             <option>@item.PlaceOrEvent</option>
-            }
         }
     </select>
     <label>החל מ</label>
     <input id="fromDate" type="date" name="fromDate" />
     <label>עד</label>
-    <input id="dateNow" type="date" name="toDate" />
+    <input id="dateNow" type="date" name="toDate"/>
     <label>טקסט חופשי</label>
     <input type="text" name="text" />
+    <input type="checkbox" id="searchArchive" name="searchArchive" value="true" />
     <input type="submit" value="סנן" />
+
 }
 <h2>לוח מציאות</h2>
+
 <div id="updateTable">
     <table class="table">
         <tr>
@@ -117,10 +162,9 @@
             </th>
             <th></th>
         </tr>
-@if(ViewBag.tbl != null)
-{foreach (var item in ViewBag.tbl)
-    {
-            <tr>
+        @foreach (var item in ViewBag.tbl)
+        {
+            <tr class="clickableAccordion">
                 <td>
                     @item.subcategoryname
                 </td>
@@ -150,7 +194,9 @@
                     @item.email
                 </td>
             </tr>
-    }
-}
+            //<tr class="fold">accordion</tr>
+
+        }
     </table>
 </div>
+

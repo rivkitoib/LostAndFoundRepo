@@ -15,6 +15,7 @@ namespace LostAndFound.Models
     [Serializable]
     public partial class Archive
     {
+
         public int id { get; set; }
 
         [Display(Name = "תת קטגוריה")]
@@ -33,9 +34,6 @@ namespace LostAndFound.Models
 
         [Display(Name = "תאריך מציאה")]
         public System.DateTime dateFound { get; set; }
-
-        [Display(Name = "תאריך עברי")]
-        public string hebrewDate { get; set; }
 
         [StringLength(maximumLength: 20)]
         [Display(Name = "הערות")]
@@ -56,7 +54,10 @@ namespace LostAndFound.Models
                     ErrorMessage = "הזן כתובת מייל תקינה")]
         [Display(Name = "כתובת מייל")]
         public string email { get; set; }
-       
         
+        [Display(Name = "האם הושב")]
+        public bool status { get; set; }
+        [Display(Name = "תאריך השבה")]
+        public System.DateTime dateStatus { get; set; }
     }
 }
