@@ -18,11 +18,10 @@ namespace LostAndFound.Controllers
         [HttpGet]
         public ActionResult CreateFind()
         {
-
             ViewBag.headCategories = DB.headCategories.ToList();
             ViewBag.locations = DB.locations.ToList();
             ViewBag.sub = getSubCategories(1);
-            return View(new Find { description = "ssss", cellphone = "0522222222", notes = "wwww", finderName = "rivkale", email = "r@gmail.com" });
+            return View(new Find { description = "ssssss", cellphone = "0522222222", notes = "wwww", finderName = "rivkale", email = "r@gmail.com" });
 
         }
         public ActionResult SelectedHeadCategory(string headCategory)
@@ -53,17 +52,20 @@ namespace LostAndFound.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateFind2(HttpPostedFileBase findFile)
+        public ActionResult CreateFind(HttpPostedFileBase findFile)
         {
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
+            Bitmap imageToEdit=null;
             if (findFile != null)
             {
                 var file = System.IO.File.Create(Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename));
                 findFile.InputStream.CopyTo(file);
                 file.Close();
                 findFile.InputStream.Close();
+                imageToEdit = new Bitmap(file);
             }
+            
             var imgBase64 = GetPropertyValue("imagedata");
             if (!string.IsNullOrEmpty(imgBase64))
             {
@@ -75,17 +77,27 @@ namespace LostAndFound.Controllers
                     image = Image.FromStream(ms);
                 }
                 image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Png);
+                image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                imageToEdit= new Bitmap(image);
+ 
             }
-            CreateFindInDB();
+            var info = GetPropertyValue("coverInfo");
+            int beginX=0, width=0, beginY=10, height=10;
+            Color color = Color.Red;
+            for(int x=beginX;x<beginX+width;x++)
+                for(int y=beginY;y<beginY+height;y++)
+                      imageToEdit.SetPixel(x,y,color );
+            var path = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"],"DB_"+ filename);
+            imageToEdit.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            CreateFindInDB(path);
             return View();
         }
         private string GetPropertyValue(string propName)
         {
-            return Request.Form.GetValues(propName).FirstOrDefault() ?? "";
+            return Request.Form.GetValues(propName).FirstOrDefault() ?? "---";
         }
 
-        private void CreateFindInDB()
+        private void CreateFindInDB(string pathToImage)
         {
             //set find object
             Find newFind = new Find();
@@ -103,6 +115,7 @@ namespace LostAndFound.Controllers
             newFind.cellphone = GetPropertyValue("cellphone");
             newFind.description = GetPropertyValue("description");
             newFind.email = GetPropertyValue("email");
+            newFind.picture = pathToImage;
             DB.finds.Add(newFind);
             try
             {

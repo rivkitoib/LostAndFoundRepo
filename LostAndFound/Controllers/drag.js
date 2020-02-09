@@ -3,7 +3,7 @@ dragElement();
 
 function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    elmnt = document.getElementById("mydiv");
+    elmnt = document.getElementById("dragableDiv");
     elmnt.onmousedown = dragMouseDown;
     function dragMouseDown(e) {
         e = e || window.event;
@@ -34,4 +34,18 @@ function dragElement(elmnt) {
         document.onmouseup = null;
         document.onmousemove = null;
     }
+}
+function saveCoverInformation() {
+    cover = document.getElementById("dragableDiv");
+    debugger
+    uploadImage = document.getElementById("uploadedImage");
+    var info = new Object();
+    info["height"] = cover.offsetHeight;
+    info["width"] = cover.offsetWidth;
+    if (!uploadImage.hidden) {
+        info["fromX"] = uploadImage.offsetLeft - cover.offsetLeft;
+        info["fromy"] = uploadImage.offsetTop - cover.offsetTop;
+    }
+    info["color"] = $(cover).css("backgroundColor");
+    return info;
 }

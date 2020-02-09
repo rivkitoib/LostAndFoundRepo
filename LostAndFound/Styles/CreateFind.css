@@ -3,7 +3,7 @@
 #vid{
     transform:scaleX(-1);
 }
-#mydiv {
+#dragableDiv {
     position: absolute;
     z-index: 9;
     background-color: #f1f1f1f7;
@@ -52,4 +52,9 @@
 #displayPicture {
    
     width: 30em;
+}
+#ketem{
+    height:30px;
+    width:30px;
+    background-color:red;
 }

@@ -69,7 +69,7 @@
             }
         );
 
-        $('#mydiv').resizable({handles:  'n,w,s,e'});
+        $('#dragableDiv').resizable({handles:  'n,w,s,e'});
 
     });
 </script>
@@ -140,7 +140,7 @@
 
             <div class="col-md-10">
                 @* @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })*@
-                <textarea class="form-control">
+                <textarea class="form-control" name="description">
             </textarea>
                 @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
             </div>  @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -179,7 +179,7 @@
                 </div>
                 <div id="displayPicture">
                     <img id="uploadedImage" src="#" alt="your image" hidden="hidden" />
-                      <div id='cameraContainer' hidden="hidden">
+                    <div id='cameraContainer' hidden="hidden">
                         <div id="vid" class='son'>
                             <video id='video'></video>
                         </div>
@@ -187,31 +187,31 @@
                             <canvas id='canvas' name="webCamPicture"></canvas>
                         </div>
                         <div id="control">
-                           
-                                <div class=""><a id='retake' class='btn hov'><i class="fas fa-sync-alt"></i></a></div>
-                                <div class=""><a id='snap' class='btn hov'><i class="fas fa-camera"></i></a></div>
-                           
+
+                            <div class=""><a id='retake' class='btn hov'><i class="fas fa-sync-alt"></i></a></div>
+                            <div class=""><a id='snap' class='btn hov'><i class="fas fa-camera"></i></a></div>
+
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="coverInformation" onclick="saveCoverInformation()">
+                saveCover
+            </div>
 
-        </div> 
-           
-     
-
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="savefind" type="submit" value="שמור מציאה" class="btn btn-default" style="position: relative;right: 141px" />
             </div>
         </div>
         <div style="text-align:center">
-            @Html.ActionLink("חזור לדף הבית", "Index")
+            @Html.ActionLink("חזור לדף הבית", "Index", "Home")
         </div>
     </div>
 </form>
 <!-- Draggable DIV -->
-<div id="mydiv">
+<div id="dragableDiv">
 
 </div>
 <script src="~/Controllers/drag.js"></script>

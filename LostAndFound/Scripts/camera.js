@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
     bs_input_file()
- 
+    $("#savefind").click(function(){
+        saveImage();
+    });
     $('#video').resize(function () {
         $('#cameraContainer').height($('#video').height());
         $('#cameraContainer').width($('#video').width());
@@ -59,6 +61,8 @@
         var dataURL = canvas.toDataURL('image/jpeg', 1.0);
         //  document.querySelector('#dl-btn').href = dataURL;
         var formdata = new FormData($("#findform")[0]);
+        coverObject = saveCoverInformation();
+        formdata.append('coverInfo', coverObject);
         formdata.append('imagedata', dataURL);
         $.ajax({
             type: "POST",
@@ -66,7 +70,7 @@
             cache: false,
             processData: false,
             async: false,
-            url: "/Home/CreateFind2",
+            url: "/Create/CreateFind",
             data: formdata
         }).done(function (o) {
             console.log('saved');
@@ -110,7 +114,8 @@ function readURL(input) {
         $('#cameraContainer').width($("#displayPicture").width());
         $('#uploadedImage').removeAttr("hidden");
         $('#cameraContainer').attr("hidden", "hidden");
-      //  $('#uploadedImage').css("hidden", "visible");
+        //  $('#uploadedImage').css("hidden", "visible");
+        $('#cameraContainer').append("<div id='ketem'></div>");
         reader.readAsDataURL(input.files[0]);
 
     }

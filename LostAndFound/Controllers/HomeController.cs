@@ -62,6 +62,11 @@ namespace LostAndFound.Controllers
             return Json(lsName, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public ActionResult CreateFind2(HttpPostedFileBase findFile)
+        {
+            return View();                
+        }
         [HttpGet]
         public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory,bool searchArchive = false)
         {
