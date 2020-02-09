@@ -3,10 +3,11 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<link href="~/Scripts/font-awesome.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.min.js")"></script>
+@*<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.validate.min.js")"></script>*@
+<script type="text/javascript" src="@Url.Content("/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 
 <style>
     .fold {
@@ -20,10 +21,10 @@
         display: inline-block
     }
 </style>
-<script src="~/Scripts/searchPage.js"></script>
 <script>
-    
-$(document).ready(function () {
+
+    $(document).ready(function () {
+        debugger;
     dateDefaultValues = function () {
         year = @DateTime.Now.Year;
         month = @DateTime.Now.Month;
@@ -121,7 +122,7 @@ $(document).ready(function () {
     <label>החל מ</label>
     <input id="fromDate" type="date" name="fromDate" />
     <label>עד</label>
-    <input id="dateNow" type="date" name="toDate"/>
+    <input id="dateNow" type="date" name="toDate" />
     <label>טקסט חופשי</label>
     <input type="text" name="text" />
     <input type="checkbox" id="searchArchive" name="searchArchive" value="true" />
