@@ -52,17 +52,17 @@ namespace LostAndFound.Controllers
 
 
         [HttpPost]
-        public ActionResult CreateFind(HttpPostedFileBase findFile)
+        public ActionResult CreateFind2(HttpPostedFileBase importFile)
         {
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
             Bitmap imageToEdit=null;
-            if (findFile != null)
+            if (importFile != null)
             {
                 var file = System.IO.File.Create(Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename));
-                findFile.InputStream.CopyTo(file);
+                importFile.InputStream.CopyTo(file);
                 file.Close();
-                findFile.InputStream.Close();
+                importFile.InputStream.Close();
                 imageToEdit = new Bitmap(file);
             }
             
@@ -81,15 +81,15 @@ namespace LostAndFound.Controllers
                 imageToEdit= new Bitmap(image);
  
             }
-            var info = GetPropertyValue("coverInfo");
-            int beginX=0, width=0, beginY=10, height=10;
-            Color color = Color.Red;
-            for(int x=beginX;x<beginX+width;x++)
-                for(int y=beginY;y<beginY+height;y++)
-                      imageToEdit.SetPixel(x,y,color );
-            var path = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"],"DB_"+ filename);
-            imageToEdit.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
-            CreateFindInDB(path);
+          //var info = GetPropertyValue("coverInfo");
+          //int beginX=0, width=0, beginY=10, height=10;
+          //Color color = Color.Red;
+          //for(int x=beginX;x<beginX+width;x++)
+          //    for(int y=beginY;y<beginY+height;y++)
+          //          imageToEdit.SetPixel(x,y,color );
+          //var path = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"],"DB_"+ filename);
+          //imageToEdit.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
+            CreateFindInDB(fullPath);
             return View();
         }
         private string GetPropertyValue(string propName)

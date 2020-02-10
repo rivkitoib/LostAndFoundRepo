@@ -70,8 +70,8 @@
             cache: false,
             processData: false,
             async: false,
-            url: "/Create/CreateFind",
-            data: formdata
+            url: "/Create/CreateFind2",
+            data: { formdata }
         }).done(function (o) {
             console.log('saved');
             // If you want the file to be visible in the browser 
