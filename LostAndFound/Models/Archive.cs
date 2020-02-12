@@ -15,7 +15,6 @@ namespace LostAndFound.Models
     [Serializable]
     public partial class Archive
     {
-
         public int id { get; set; }
 
         [Display(Name = "תת קטגוריה")]

@@ -29,6 +29,7 @@ namespace LostAndFound.Controllers
 
                          select new View()
                          {
+                             picture=f.picture,
                              id = f.id,
                              idSubCategory = f.subCategory.id,
                              name = f.finderName,
@@ -113,6 +114,7 @@ namespace LostAndFound.Controllers
 
             var filteredFinds = findsFilterQuery.Select(f => new View()
             {
+                picture=f.picture,
                 id = f.id,
                 idSubCategory = f.subCategory.id,
                 name = f.finderName,
