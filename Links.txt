@@ -1,0 +1,13 @@
+openCV
+http://www.emgu.com/wiki/files/4.2.0/document/html/8dee1f02-8c8a-4e37-87f4-05e10c39f27d.htm
+webCam
+https://codepen.io/itsnotme/pen/eKEzoo
+
+https://www.technologycrowds.com/2015/10/jquery-mvc-upload-image-using-jquery.html
+
+netstat -an | find /i "listening" in cmd for ports
+https://asp.net-tutorials.com/misc/sending-mails/
+
+https://myaccount.google.com/lesssecureapps to let sending mails
+
+https://codepedia.info/upload-image-using-jquery-ajax-asp-net-c-sharp/
