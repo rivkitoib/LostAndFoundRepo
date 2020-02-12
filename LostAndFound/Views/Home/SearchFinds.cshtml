@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<LostAndFound.Models.Find>
 
-    <table class="table">
+@*<table class="table">
 
         <tr>
             <th>
@@ -66,6 +66,45 @@
             </tr>
 
         }
-    </table>
+    </table>*@
+
+<ul class="cd-items cd-container card">
+    @foreach (var item in ViewBag.tbl)
+    {
+
+        <li class="cd-item">
+            <div class="cd-item-img-container">
+                <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+            </div>
+            <div style="background-color:ghostwhite">
+                <h4 class="card-title">@item.subcategoryname</h4>
+                <div>@item.subcategoryname</div>
+                <div>@item.description</div>
+            </div>
+            <a href="#0" class="cd-trigger">Quick View</a>
+        </li>
+    }
+</ul>
+<div class="cd-quick-view">
+    <div class="cd-slider-wrapper">
+        <ul class="cd-slider">
+            <li class="selected">
+                @*<img src="@item.picture" alt="Item Preview" />*@
+            </li>
+
+
+        </ul> <!-- cd-slider -->
+
+        <ul class="cd-slider-navigation">
+            <li><a class="cd-next" href="#0">Prev</a></li>
+            <li><a class="cd-prev" href="#0">Next</a></li>
+        </ul> <!-- cd-slider-navigation -->
+    </div> <!-- cd-slider-wrapper -->
+
+    <div class="cd-item-info">
+
+    </div> <!-- cd-item-info -->
+    <a href="#0" class="cd-close">Close</a>
+</div>
 
 
