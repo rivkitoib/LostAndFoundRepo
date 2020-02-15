@@ -80,25 +80,20 @@ namespace LostAndFound.Controllers
             }
 
             //sorting by place
-            if (place != "בחר מקום")
+            if (place != "הכל" && place != "בחר מקום")
             {
                 findsFilterQuery = findsFilterQuery.Where(x => x.location.PlaceOrEvent.Equals(place));
             }
             //sorting by category or subCategory
-            if (hiddenCategory != null && hiddenCategory != "הכל")
+            if (hiddenCategory != null && hiddenCategory != "הכל"&& hiddenCategory != "בחר קטגוריה" )
             {
-                if (subCategory != "בחר תת קטגוריה")
+                if (subCategory != "הכל" && subCategory != "בחר תת קטגוריה")
                 {
                     findsFilterQuery = findsFilterQuery.Where(x => x.subCategory.name.Equals(subCategory));
                 }
                 else
                 {
-                    var subCategoriesFilter = DB.subCategories.Where(x => x.headCategory.Name.Equals(hiddenCategory));
-
-                    findsFilterQuery = from a in subCategoriesFilter
-                                       join b in findsFilterQuery
-                                       on a.id equals b.subCategory.id
-                                       select b;
+                    findsFilterQuery = findsFilterQuery.Where(x => x.subCategory.headCategory.Name.Equals(hiddenCategory));
                 }
             }
             //sorting by date
