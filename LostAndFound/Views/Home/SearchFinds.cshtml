@@ -1,73 +1,4 @@
 ﻿@model IEnumerable<LostAndFound.Models.Find>
-
-@*<table class="table">
-
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.subCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateFound)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.finderName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cellphone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in ViewBag.tbl)
-        {
-            <tr>
-                <td>
-                    @item.subcategoryname
-                </td>
-                <td>
-                    @item.description
-                </td>
-                <td>
-                    ""
-                </td>
-                <td>
-                    @item.PlaceOrEvent
-                </td>
-                <td>
-                    @item.date
-                </td>
-
-                <td>
-                    @item.notes
-                </td>
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.cellphone
-                </td>
-                <td>
-                    @item.email
-                </td>
-            </tr>
-
-        }
-    </table>*@
-
 <ul class="cd-items cd-container card">
     @foreach (var item in ViewBag.tbl)
     {
@@ -83,6 +14,8 @@
             </div>
             <a href="#0" class="cd-trigger">Quick View</a>
         </li>
+
+
     }
 </ul>
 <div class="cd-quick-view">
@@ -90,15 +23,16 @@
         <ul class="cd-slider">
             <li class="selected">
                 @*<img src="@item.picture" alt="Item Preview" />*@
+                <img src="~/icons/tempLogo.JPG" alt="Item Preview" />
+
             </li>
 
 
         </ul> <!-- cd-slider -->
-
-        <ul class="cd-slider-navigation">
-            <li><a class="cd-next" href="#0">Prev</a></li>
-            <li><a class="cd-prev" href="#0">Next</a></li>
-        </ul> <!-- cd-slider-navigation -->
+        @*<ul class="cd-slider-navigation">
+                <li><a class="cd-next" href="#0">Prev</a></li>
+                <li><a class="cd-prev" href="#0">Next</a></li>
+            </ul>*@ <!-- cd-slider-navigation -->
     </div> <!-- cd-slider-wrapper -->
 
     <div class="cd-item-info">
@@ -106,5 +40,3 @@
     </div> <!-- cd-item-info -->
     <a href="#0" class="cd-close">Close</a>
 </div>
-
-

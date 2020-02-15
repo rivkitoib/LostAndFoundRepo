@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <link href="~/trial/style.css" rel="stylesheet" />
 <link href="~/Scripts/product-quick-view-master/css/css.css" rel="stylesheet" />
 <link href="~/Scripts/product-quick-view-master/css/reset.css" rel="stylesheet" />
@@ -57,104 +59,110 @@
    });
 </script>
 @*<img src="~/trial/image.png" id="background" alt="רקע לא נמצא" />*@
-<img src="~/icons/432.jpg"  id="background" alt="רקע לא נמצא"/>
+<img src="~/icons/432.jpg" id="background" alt="רקע לא נמצא" />
 <p>
-   
-    @Html.ActionLink("הוסף מציאה", "CreateFind","Create")
+
+    @Html.ActionLink("הוסף מציאה", "CreateFind", "Create")
 </p>
-<div class="row">
-    <div id="container1" class="containerx col-md-4">
+
+<div id="container1" class="containerx">
+    <img style="height:25px" src="~/trial/email.ico" />
+    <form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
+        <select id="category" name="category" class="input1">
+            <option>בחר קטגוריה</option>
+            @foreach (var item in ViewBag.category)
+            {
+                <option>@item.Name</option>
+            }
+        </select>
+    </form>
+    @using (Ajax.BeginForm("SearchFinds", new AjaxOptions()
+    {
+        UpdateTargetId = "updateTable",
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace
+
+    }))
+    {
+
         <img style="height:25px" src="~/trial/email.ico" />
-        <form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
-            <select id="category" name="category" class="input1">
-                <option>בחר קטגוריה</option>
-                @foreach (var item in ViewBag.category)
+
+
+        <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
+
+        <select id="subCategories" name="subCategory" class="input1">
+            <option>בחר תת קטגוריה</option>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
                 {
-                    <option>@item.Name</option>
+                    <option>@item</option>
                 }
-            </select>
-        </form>
-        @using (Ajax.BeginForm("SearchFinds", new AjaxOptions()
+
+            }
+        </select>
+        <img style="height:25px" src="~/trial/email.ico" />
+        <select id="place" name="place" class="input1">
+            <option>בחר מקום</option>
+            @foreach (var item in ViewBag.place)
+            {
+                <option>@item.PlaceOrEvent</option>
+            }
+        </select>
+        <img style="height:25px" src="~/trial/email.ico" />
+        <input id="fromDate" type="date" name="fromDate" class="input1" />
+        <input id="dateNow" type="date" name="toDate" class="input1" />
+        <img style="height:25px" src="~/trial/email.ico" />
+        <input type="text" placeholder="טקסט חופשי" name="text" class="input1" />
+        <img style="height:25px" src="~/trial/email.ico" />
+        <div class="row"><input type="checkbox" id="searchArchive" name="searchArchive" value="true" class=" col-md-4" /><label class="col-md-4">חיפוש בארכיון</label></div>
+        <input type="submit" class="input1" value="סנן" />
+
+    }
+</div>
+<div id="updateTable">
+    <ul class="cd-items cd-container card">
+        @foreach (var item in ViewBag.tbl)
         {
-            UpdateTargetId = "updateTable",
-            HttpMethod = "GET",
-            InsertionMode = InsertionMode.Replace
 
-        }))
-        {
-            <img style="height:25px" src="~/trial/email.ico" />
+            <li class="cd-item">
+                <div class="cd-item-img-container">
+                    <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                </div>
+                <div style="background-color:ghostwhite">
+                    <h4 class="card-title">@item.subcategoryname</h4>
+                    <div>@item.subcategoryname</div>
+                    <div>@item.description</div>
+                </div>
+                <a href="#0" class="cd-trigger">Quick View</a>
+            </li>
 
-            <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
-            <select id="subCategories" name="subCategory" class="input1">
-                <option>בחר תת קטגוריה</option>
-                @if (Model != null)
-                {
-                    foreach (var item in Model)
-                    {
-                        <option>@item</option>
-                    }
-
-                }
-            </select>
-            <img style="height:25px" src="~/trial/email.ico" />
-            <select id="place" name="place" class="input1">
-                <option>בחר מקום</option>
-                @foreach (var item in ViewBag.place)
-                {
-                    <option>@item.PlaceOrEvent</option>
-                }
-            </select>
-            <img style="height:25px" src="~/trial/email.ico" />
-            <input id="fromDate" type="date" name="fromDate" class="input1" />
-            <input id="dateNow" type="date" name="toDate" class="input1" />
-            <img style="height:25px" src="~/trial/email.ico" />
-            <input type="text" placeholder="טקסט חופשי" name="text" class="input1" />
-            <img style="height:25px" src="~/trial/email.ico" />
-            <div class="row"><input type="checkbox" id="searchArchive" name="searchArchive" value="true" class=" col-md-4" /><label class="col-md-4">חיפוש בארכיון</label></div>
-            <input type="submit" class="input1" value="סנן" />
 
         }
-    </div>
-    <div id="updateTable" class="col-md-8">
+    </ul>
+    <div class="cd-quick-view">
+        <div class="cd-slider-wrapper">
+            <ul class="cd-slider">
+                <li class="selected">
+                    @*<img src="@item.picture" alt="Item Preview" />*@
+                    <img src="~/icons/tempLogo.JPG" alt="Item Preview" />
 
-        <ul class="cd-items cd-container card">
-            @foreach (var item in ViewBag.tbl)
-            {
-
-                <li class="cd-item">
-                    <div class="cd-item-img-container">
-                        <img src="@Url.Content(@item.picture)" alt="Item Preview" />
-                    </div>
-                    <div style="background-color:ghostwhite">
-                        <h4 class="card-title">@item.subcategoryname</h4>
-                        <div>@item.subcategoryname</div>
-                        <div>@item.description</div>
-                    </div>
-                    <a href="#0" class="cd-trigger">Quick View</a>
                 </li>
-            }
-        </ul>
-        <div class="cd-quick-view">
-            <div class="cd-slider-wrapper">
-                <ul class="cd-slider">
-                    <li class="selected">
-                        @*<img src="@item.picture" alt="Item Preview" />*@
-                    </li>
 
 
-                </ul> <!-- cd-slider -->
-
-                <ul class="cd-slider-navigation">
+            </ul> <!-- cd-slider -->
+            @*<ul class="cd-slider-navigation">
                     <li><a class="cd-next" href="#0">Prev</a></li>
                     <li><a class="cd-prev" href="#0">Next</a></li>
-                </ul> <!-- cd-slider-navigation -->
-            </div> <!-- cd-slider-wrapper -->
+                </ul>*@ <!-- cd-slider-navigation -->
+        </div> <!-- cd-slider-wrapper -->
 
-            <div class="cd-item-info">
+        <div class="cd-item-info">
 
-            </div> <!-- cd-item-info -->
-            <a href="#0" class="cd-close">Close</a>
-        </div>
+        </div> <!-- cd-item-info -->
+        <a href="#0" class="cd-close">Close</a>
     </div>
+
 </div>
+
 

@@ -213,7 +213,7 @@ header {
 	@include MQ(L) {
 		display: block;
 		position: fixed;
-		max-width: 900px;
+		//max-width: 900px;
 		visibility: hidden;
 
 		/* Force Hardware Acceleration in WebKit */
