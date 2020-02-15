@@ -5,8 +5,9 @@ jQuery(document).ready(function($){
 		maxQuickWidth = 900;
 
 	//open the quick view panel
-	$('.cd-trigger').on('click', function(event){
-		var selectedImage = $(this).parent('.cd-item').children('img'),
+	$('.cd-trigger').on('click', function (event) {
+		var selectedImage = $(this).parent('.cd-item').children('.cd-item-img-container').children('img'),
+		//var selectedImage = $(this).parent('.cd-item').children('img'),
 			slectedImageUrl = selectedImage.attr('src');
 
 		$('body').addClass('overlay-layer');
@@ -81,7 +82,7 @@ jQuery(document).ready(function($){
 	function animateQuickView(image, finalWidth, maxQuickWidth, animationType) {
 		//store some image data (width, top position, ...)
 		//store window data to calculate quick view panel position
-		var parentListItem = image.parent('.cd-item'),
+		var parentListItem = image.parent('.cd-item-img-container').parent('.cd-item'),
 			topSelected = image.offset().top - $(window).scrollTop(),
 			leftSelected = image.offset().left,
 			widthSelected = image.width(),
@@ -138,7 +139,7 @@ jQuery(document).ready(function($){
 		}
 	}
 	function closeNoAnimation(image, finalWidth, maxQuickWidth) {
-		var parentListItem = image.parent('.cd-item'),
+		var parentListItem = image.parent('.cd-item-img-container').parent('.cd-item'),
 			topSelected = image.offset().top - $(window).scrollTop(),
 			leftSelected = image.offset().left,
 			widthSelected = image.width();

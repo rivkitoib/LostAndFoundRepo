@@ -213,7 +213,8 @@ header h1 {
   .cd-quick-view {
     display: block;
     position: fixed;
-    max-width: 900px;
+    width: 300px;
+    height:450px;
     visibility: hidden;
     /* Force Hardware Acceleration in WebKit */
     -webkit-transform: translateZ(0);
@@ -229,7 +230,6 @@ header h1 {
   .cd-quick-view:after {
     content: "";
     display: table;
-    clear: both;
   }
   .cd-quick-view.is-visible {
     /* class added when user clicks on .cd-trigger */
@@ -533,4 +533,9 @@ header h1 {
   -webkit-transition: -webkit-transform .3s 0s, visibility 0s 0s;
   -moz-transition: -moz-transform .3s 0s, visibility 0s 0s;
   transition: transform .3s 0s, visibility 0s 0s;
+}
+
+.cd-items cd-container card {
+    height:90vh;
+    overflow-y: scroll;
 }
