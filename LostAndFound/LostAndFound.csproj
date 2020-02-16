@@ -125,11 +125,40 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Controllers\drag.js" />
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Icons\camera.png" />
+    <Content Include="Images\Icons\category.png" />
+    <Content Include="Images\Icons\date.ico" />
+    <Content Include="Images\Icons\date.png" />
+    <Content Include="Images\Icons\description.ico" />
+    <Content Include="Images\Icons\description.png" />
+    <Content Include="Images\Icons\email.ico" />
+    <Content Include="Images\Icons\file.png" />
+    <Content Include="Images\Icons\home.ico" />
+    <Content Include="Images\Icons\location.ico" />
+    <Content Include="Images\Icons\location.png" />
+    <Content Include="Images\Icons\mail.png" />
+    <Content Include="Images\Icons\name.ico" />
+    <Content Include="Images\Icons\name.png" />
+    <Content Include="Images\Icons\notes.ico" />
+    <Content Include="Images\Icons\notes.png" />
+    <Content Include="Images\Icons\phone - Copy.ico" />
+    <Content Include="Images\Icons\phone.ico" />
+    <Content Include="Images\Icons\phone.png" />
+    <Content Include="Images\Icons\send.png" />
+    <Content Include="Images\Icons\subCategory.png" />
+    <Content Include="Images\image2.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />
+    <Content Include="Scripts\camera_original.js" />
+    <Content Include="Scripts\imported\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\imported\jquery-ui.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -139,6 +168,42 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="fonts\DanaYadAlefAlefAlef-Normal.otf" />
+    <Content Include="fonts\DanaYadAlefAlefAlef-Normal.woff" />
+    <Content Include="fonts\miriwin-webfont.ttf" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <Content Include="fonts\font-awesome-4.7.0\less\animated.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\core.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\icons.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\larger.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\list.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\mixins.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\path.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\stacked.less" />
+    <Content Include="fonts\font-awesome-4.7.0\less\variables.less" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -152,7 +217,15 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Self\camera.js" />
+    <Content Include="Scripts\Self\CreateFind.js" />
     <Content Include="Styles\CreateFind.css" />
+    <Content Include="Styles\imported\font-awesome.css" />
+    <Content Include="Styles\imported\jquery-3.4.1.min.js" />
+    <Content Include="Styles\imported\jquery-ui.min.css" />
+    <Content Include="Styles\main.css" />
+    <Content Include="Styles\Self\CreateFind.css" />
+    <Content Include="Styles\util.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -185,6 +258,8 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Views\Create\CreateFind2.cshtml" />
+    <Content Include="Views\Create\estie.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -194,6 +269,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\ForDB\" />
+    <Folder Include="Images\Original\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

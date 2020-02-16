@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     bs_input_file()
-    $("#savefind").click(function(){
+    $("#savefind").click(function () {
+        console.log("save find");
         saveImage();
     });
     $('#video').resize(function () {
@@ -29,7 +30,6 @@
         } catch (error) {
             video.src = null;
         }
-        debugger;
         var track = strr.getTracks()[0];  // if only one media track
         // ...
         track.stop();

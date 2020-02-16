@@ -1,44 +1,177 @@
 ﻿@model LostAndFound.Models.Find
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-@{
-    ViewBag.Title = "CreateFind";
-}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/camera.js"></script>
-<script src="~/Scripts/jquery-ui.min.js"></script>
 
+@*<script src="~/Scripts/imported/jquery-3.4.1.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+@*<script src="~/Scripts/imported/jquery-ui.min.js"></script>*@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="~/Scripts/Self/camera.js"></script>
+<script src="~/Scripts/Self/CreateFind.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-<link href="~/Scripts/jquery-ui.min.css" rel="stylesheet" />
-<link href="~/Styles/CreateFind.css" rel="stylesheet" />
-@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
+<link href="~/Styles/imported/jquery-ui.min.css" rel="stylesheet" />
+<link href="~/Styles/Self/CreateFind.css" rel="stylesheet" />
+
+<form id="findform1">
+    <div id="container1" class="container_">
+        <div class="container_title">המציאה</div>
+        <div class="container_input">
+            @*<img class="input_icon" src="email.ico" />*@
+            <img class="input_icon" src="~/Images/Icons/category.png" title="קטגוריה" />
+
+            <select id="category" name="headCategory" class="input1">
+                @if (ViewBag.headCategories != null)
+                {
+                    foreach (var item in ViewBag.headCategories)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/subCategory.png" title="תת קטגוריה" />
+            <select id="subCategories" name="subCategory" class="input1">
+
+                @if (ViewBag.sub != null)
+                {
+                    foreach (var item in ViewBag.sub)
+                    {
+                        <option>@item</option>
+                    }
+                }
+                <option>אחר</option>
+            </select>
+        </div>
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/location.png" title="היכן נמצא" />
+            <select id="location" name="location" class="input1">
+                @if (ViewBag.locations != null)
+                {
+                    foreach (var item in ViewBag.locations)
+                    {
+                        <option value="@item.Id">@item.PlaceOrEvent</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/date.png" title="תאריך מציאה" />
+            <input type="date" id="dateFound" name="dateFound" class="input1" />
+            @Html.ValidationMessageFor(model => model.dateFound, "", new
+           { @class = "text-danger", })
+        </div>
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/description.png" title="תאור" />
+            <textarea class="input1" name="description" placeholder="תאור"></textarea>
+            @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
+        </div>
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/notes.png" title="הערות" />
+            <input class="input1" name="notes" placeholder="הערות" />
+            @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+    <div id="container2" class="container_">
+        <div class="container_title">המוצא</div>
+
+
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/name.png" title="שם המוצא" />
+            <input class="input1" required name="finderName" placeholder="שם" />
+            @Html.ValidationMessageFor(model => model.finderName, "", new { @class = "text-danger" })
+        </div>
+        <div class="container_input">
+            <img class="input_icon" required src="~/Images/Icons/phone.png" title="טלפון" />
+            <input class="input1" name="cellphone" placeholder="טלפון" />
+            @Html.ValidationMessageFor(model => model.cellphone, "", new { @class = "text-danger" })
+        </div>
+        <div class="container_input">
+            <img class="input_icon" src="~/Images/Icons/mail.png" title="דואר אלקטרוני" />
+            <input type="email" class="input1" name="email" placeholder="דואר אלקטרוני" />
+            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+        </div>
+        <div class="input_icon"></div>
+
+
+    </div>
+    <div id="container3" class="container_">
+        <div class="container_title">תמונה</div>
+        <div>
+            <div id="inputFile">
+                <img id="uploadImage_btn" src="~/Images/Icons/file.png" class="input_icon" title="העלה תמונה" />
+                <img id='openCamera' src="~/Images/Icons/camera.png" class="input_icon" title="פתח מצלמה" />
+
+                @*<input id="uploadImage_btn" class="btn btn-default btn-choose" type="button" value="קובץ" title="העלה תמונה" />
+                    <a class="btn btn-default btn-choose" id='openCamera'>
+
+                        Open cam
+                    </a>*@
+            </div>
+            <div id="displayPicture">
+                <img id="uploadedImage" class="imagePlace" name="uploadedImage" src="#" alt="your image" hidden="hidden" />
+                <div id='cameraContainer' hidden="hidden">
+                    <div id="vid" class=''>
+                        <video id="video" class="imagePlace"></video>
+                    </div>
+                    <canvas id='canvas' name="webCamPicture" class="imagePlace"></canvas>
+                    <div id="control">
+
+                        <a id='retake'><i class="fas fa-sync-alt"></i></a>
+                        <a id='snap'><i class="fas fa-check"></i></a>
+
+                    </div>
+                </div>
+                <div id="dragableDiv">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @*<img src="image.png" id="background" alt="רקע לא נמצא" />*@
+
+<div id="container4" class="container_">סימן- הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו
+   הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"</div>
+    <button type="submit" id="saveFind" title="שמור מציאה"><i class="fas fa-angle-left"></i></button>
+    @*<input type="submit" id="saveFind" class="ui-button" value="שמור מציאה" />*@
+</form>
+
 <script type="text/javascript">
     $(document).ready(function () {
-        //send category
-        $("#category").change(function () {
-            //$("#hiddenMainCategory").val($("#category").val());
-            $("#categoryForm").submit();
+       // $('#dragableDiv').resizable({ handles: 'n,w,s,e' });
+
+    $('#category').on('change', function () {
+        var selected = $('#category').val();
+        $.ajax({
+            type: "GET",
+            async: false,
+            url: "/Create/SelectedHeadCategory",
+            data: { headCategory: selected },
+            success: function (result) {
+                var dropdown = $("#subCategories");
+                dropdown.find('option').remove().end()
+                $.each(result, function () {
+                    dropdown.append($("<option />").val(this).text(this));
+                });
+                dropdown.append($("<option />").val('אחר').text('אחר'));
+                $("#subCategories").val($("#subCategories option:first").val());
+            }
+        }).done(function (o) {
+            console.log('saved');
+            // If you want the file to be visible in the browser
+            // - please modify the callback in javascript. All you
+            // need is to return the url to the file, you just saved
+            // and than put the image in your browser.
         });
-        var theAllOption = ($("<option>אחר</option>"));
-        $("#categoryForm").submit(function (event) {
-            event.preventDefault();
-            var target = $(this);
-            $.ajax({
-                url: target.attr("action"),
-                data: target.serialize(),
-                success: function (data) {
-                    $("#subCategories").empty();
-                    $.each(data, function (i, value) {
-                        $("#subCategories").append($("<option>" + JSON.stringify(value).split('"')[1] + "</option>"));
-                    });
-                    $("#subCategories").append(theAllOption);
-                }
-            });
-        });
+          });
           //set dateNow
         dateNOW = function () {  year = @DateTime.Now.Year;
         month = @DateTime.Now.Month;
@@ -49,11 +182,12 @@
              day = '0' + day;
         date = year + "-" + month + "-" + day;
 
-        $("#date").val(date);
+        $("#dateFound").val(date);
         }
+        debugger
         dateNOW();
         //after changing date
-        $("#date").change(
+        $("#dateFound").change(
             function () {
                 if ($(this).val() == "") {
                     year = @DateTime.Now.Year;
@@ -69,152 +203,8 @@
             }
         );
 
-        $('#dragableDiv').resizable({handles:  'n,w,s,e'});
 
-    });
+        $("#dragableDiv").resizable({ handles: 'n,w,s,e' });
+
+});
 </script>
-<h2>מציאה חדשה</h2>4
-<form id="categoryForm" action="@Url.Action("SelectedHeadCategory", "Create")">
-
-    <hr />
-    <div class="form-group" style="margin-right:-11px;height: 33px">
-
-
-        <div class="col-md-10">
-            <select id="category" name="headCategory" class="form-control">
-                @if (ViewBag.headCategories != null)
-                {
-                    foreach (var item in ViewBag.headCategories)
-                    {
-                        <option value="@item.Id">@item.Name</option>
-                    }
-                }
-            </select>
-        </div> <label class="control-label col-md-2">קטגוריה</label>
-    </div>
-</form>
-<form id="findform" enctype="multipart/form-data">
-    @* @Html.AntiForgeryToken()*@
-
-    <div class="form-horizontal">
-        <div class="form-group">
-
-            <div class="col-md-10">
-                <select id="subCategories" name="subCategory" class="form-control">
-
-                    @if (ViewBag.sub != null)
-                    {
-                        foreach (var item in ViewBag.sub)
-                        {
-                            <option>@item</option>
-                        }
-                    }
-                    <option>אחר</option>
-                </select>
-            </div> @Html.LabelFor(model => model.subCategory, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-10">
-                <select id="location" name="location" class="form-control">
-                    @if (ViewBag.locations != null)
-                    {
-                        foreach (var item in ViewBag.locations)
-                        {
-                            <option value="@item.Id">@item.PlaceOrEvent</option>
-                        }
-                    }
-                </select>
-            </div>
-            @Html.LabelFor(model => model.location, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-10">
-                <input type="date" class="form-control" id="date" name="dateFound" />
-
-                @Html.ValidationMessageFor(model => model.dateFound, "", new { @class = "text-danger" })
-            </div>@Html.LabelFor(model => model.dateFound, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-
-            <div class="col-md-10">
-                @* @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })*@
-                <textarea class="form-control" name="description">
-            </textarea>
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>  @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.notes, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.notes, "", new { @class = "text-danger" })
-            </div> @Html.LabelFor(model => model.notes, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.finderName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.finderName, "", new { @class = "text-danger" })
-            </div>  @Html.LabelFor(model => model.finderName, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cellphone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cellphone, "", new { @class = "text-danger" })
-            </div> @Html.LabelFor(model => model.cellphone, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-            </div>  @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-        </div>
-        <div>
-            <div class="form-group">
-                @* here will be hidden upload button *@
-                <div class="input-group input-file">
-                    <input id="uploadImage_btn" class="btn btn-default btn-choose" type="button" value="קובץ" />
-                    <a class="btn btn-default btn-choose" id='openCamera'> Open cam</a>
-                </div>
-                <div id="displayPicture">
-                    <img id="uploadedImage" src="#" alt="your image" hidden="hidden" />
-                    <div id='cameraContainer' hidden="hidden">
-                        <div id="vid" class='son'>
-                            <video id='video'></video>
-                        </div>
-                        <div id="capture" class='son'>
-                            <canvas id='canvas' name="webCamPicture"></canvas>
-                        </div>
-                        <div id="control">
-
-                            <div class=""><a id='retake' class='btn hov'><i class="fas fa-sync-alt"></i></a></div>
-                            <div class=""><a id='snap' class='btn hov'><i class="fas fa-camera"></i></a></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="coverInformation" onclick="saveCoverInformation()">
-                saveCover
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input id="savefind" type="submit" value="שמור מציאה" class="btn btn-default" style="position: relative;right: 141px" />
-            </div>
-        </div>
-        <div style="text-align:center">
-            @Html.ActionLink("חזור לדף הבית", "Index", "Home")
-        </div>
-    </div>
-</form>
-<!-- Draggable DIV -->
-<div id="dragableDiv">
-
-</div>
-<script src="~/Controllers/drag.js"></script>
-
-
-

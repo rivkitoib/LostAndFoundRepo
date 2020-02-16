@@ -12,16 +12,23 @@ namespace LostAndFound.Controllers
 {
     public class CreateController : Controller
     {
+        [HttpGet]
+        public ActionResult CreateFind33()
+        {
+
+            return View("estie");
+
+        }
         // GET: Home
         DbHandle DB = new DbHandle();
-     
+
         [HttpGet]
         public ActionResult CreateFind()
         {
             ViewBag.headCategories = DB.headCategories.ToList();
             ViewBag.locations = DB.locations.ToList();
             ViewBag.sub = getSubCategories(1);
-            return View(new Find { description = "ssssss", cellphone = "0522222222", notes = "wwww", finderName = "rivkale", email = "r@gmail.com" });
+            return View(new Find { cellphone = "0522222222", notes = "wwww", finderName = "rivkale", email = "r@gmail.com" });
 
         }
         public ActionResult SelectedHeadCategory(string headCategory)
@@ -54,19 +61,68 @@ namespace LostAndFound.Controllers
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase importFile)
         {
+            
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
-            Bitmap imageToEdit=null;
+            var imgBase64 = GetPropertyValue("imagedata");
+            bool specifiedImgae = true;
             if (importFile != null)
             {
-                var file = System.IO.File.Create(Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename));
-                importFile.InputStream.CopyTo(file);
-                file.Close();
-                importFile.InputStream.Close();
-                imageToEdit = new Bitmap(file);
+                using (Image img = Image.FromStream(importFile.InputStream))
+                {
+                    var sizes = GetPropertyValue("sizes").Split(';');
+                    int h = int.Parse(sizes[0]);
+                    int w = int.Parse(sizes[1]);
+                    using (Bitmap b = new Bitmap(img, new Size(w, h)))
+                    {
+                        b.Save(fullPath);
+                        importFile.InputStream.Close();
+                    }
+                }
             }
-            
-            var imgBase64 = GetPropertyValue("imagedata");
+            else if (imgBase64 != "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCACWASwDAREAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJ/4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z")
+            {
+                if (!string.IsNullOrEmpty(imgBase64))
+                {
+                    var imageData = imgBase64.Split(',')[1];
+                    var bytes = Convert.FromBase64String(imageData);
+                    Image image;
+                    using (MemoryStream ms = new MemoryStream(bytes))
+                    {
+                        image = Image.FromStream(ms);
+                    }
+                    image.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                    image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                }
+            }
+            else
+            {
+                fullPath = ConfigurationManager.AppSettings["DefaultFindPicture"];
+                specifiedImgae = false;
+            }
+            if (specifiedImgae)
+            {
+                var imageToEdit = new Bitmap(fullPath);
+                var info = GetPropertyValue("coverInfo").Split(';');
+
+                int x = int.Parse(info[2]), width = int.Parse(info[1]), y = int.Parse(info[3]), height = int.Parse(info[0]);
+                Color color = Color.LightGray;
+                for (; x < width; x++)
+                    for (int y1 = y; y1 < y + height; y1++)
+                        imageToEdit.SetPixel(x, y1, color);
+                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], "DB_" + filename);
+                imageToEdit.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }
+            CreateFindInDB(fullPath);
+            return RedirectToAction("Index","Home");
+        }
+        [HttpPost]
+        public ActionResult CreateFind(HttpPostedFileBase importFile)
+        {
+            var filename = $"{Guid.NewGuid().ToString()}.jpg";
+            var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
+            var imgBase64 = Request.Form.GetValues("imagedata").FirstOrDefault();
             if (!string.IsNullOrEmpty(imgBase64))
             {
                 var imageData = imgBase64.Split(',')[1];
@@ -78,37 +134,32 @@ namespace LostAndFound.Controllers
                 }
                 image.RotateFlip(RotateFlipType.RotateNoneFlipX);
                 image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-                imageToEdit= new Bitmap(image);
- 
             }
-          //var info = GetPropertyValue("coverInfo");
-          //int beginX=0, width=0, beginY=10, height=10;
-          //Color color = Color.Red;
-          //for(int x=beginX;x<beginX+width;x++)
-          //    for(int y=beginY;y<beginY+height;y++)
-          //          imageToEdit.SetPixel(x,y,color );
-          //var path = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"],"DB_"+ filename);
-          //imageToEdit.Save(path, System.Drawing.Imaging.ImageFormat.Jpeg);
             CreateFindInDB(fullPath);
             return View();
         }
-        private string GetPropertyValue(string propName)
+        private string GetPropertyValue(string propName, string defval = "")
         {
-            return Request.Form.GetValues(propName).FirstOrDefault() ?? "---";
+            var v = Request.Form.GetValues(propName).FirstOrDefault() ?? defval;
+            if (string.IsNullOrEmpty(v))
+            {
+                v = defval;
+            }
+            return v;
         }
 
         private void CreateFindInDB(string pathToImage)
         {
             //set find object
             Find newFind = new Find();
-            string subCategory = GetPropertyValue("subCategory");
+            string subCategory = GetPropertyValue("subCategory", "אחר");
             if (subCategory == "אחר")
                 newFind.subCategory.id = DB.subCategories.First(x => x.headCategory.Id == _headCategory && x.name == "אחר").id;
             else
                 newFind.subCategory = DB.subCategories.First(x => x.name == subCategory);
             int locationId = int.Parse(GetPropertyValue("location"));
             newFind.location = DB.locations.First(x => x.Id == locationId);
-            newFind.dateFound = DateTime.Parse(GetPropertyValue("dateFound"));
+            newFind.dateFound = DateTime.Parse(GetPropertyValue("dateFound", DateTime.Now.ToString()));
             //picture
             newFind.notes = GetPropertyValue("notes");
             newFind.finderName = GetPropertyValue("finderName");
@@ -134,5 +185,5 @@ namespace LostAndFound.Controllers
 
             return View();
         }
-      }
+    }
 }

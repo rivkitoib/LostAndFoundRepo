@@ -11,11 +11,11 @@ namespace LostAndFound.Controllers
     {
         public static void send()
         {
-            string from = "rivki.toib@gmail.com"; //Replace this with your own correct Gmail Address
+            string from = "rivki.toib@gmail.com";
 
-            string to = "tzippyglantz@gmail.com"; //Replace this with the Email Address to whom you want to send the mail
+            string to = "tzippyglantz@gmail.com";
 
-        System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
+            System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
             mail.To.Add(to);
             mail.From = new MailAddress(from, "והשבות", System.Text.Encoding.UTF32);
             mail.Subject = "This is a test mail";
@@ -26,7 +26,6 @@ namespace LostAndFound.Controllers
             mail.Priority = MailPriority.High;
 
             SmtpClient client = new SmtpClient();
-            //Add the Creddentials- use your own email id and password
 
             client.Credentials = new System.Net.NetworkCredential(from, "207456054");
             client.Port = 587; // Gmail works on this port<o:p />
@@ -51,3 +50,14 @@ namespace LostAndFound.Controllers
         }
     }
 }
+//using (StreamReader reader = File.OpenText(htmlFilePath)) // Path to your 
+//{                                                         // HTML file
+//    MailMessage myMail = new MailMessage();
+//myMail.From = "from@microsoft.com";
+//    myMail.To = "to@microsoft.com";
+//    myMail.Subject = "HTML Message";
+//    myMail.BodyFormat = MailFormat.Html;
+
+//    myMail.Body = reader.ReadToEnd();  // Load the content from your file...
+//    //...
+//}
