@@ -36,19 +36,5 @@ function dragElement(elmnt) {
         document.onmousemove = null;
     }
 }
-    function saveCoverInformation() {
-        cover = document.getElementById("dragableDiv");
-        uploadImage = document.getElementById("uploadedImage");
-        var info = new Object();
-        info["height"] = cover.offsetHeight;
-        info["width"] = cover.offsetWidth;
-        if (!uploadImage.hidden) {
-            info["fromX"] = uploadImage.offsetLeft - cover.offsetLeft;
-            info["fromy"] = uploadImage.offsetTop - cover.offsetTop;
-        }
-        info["color"] = $(cover).css("backgroundColor");
-        return info;
-    }
-  //  $('#dragableDiv').resizable({ handles: 'n,w,s,e' });
 
 });
