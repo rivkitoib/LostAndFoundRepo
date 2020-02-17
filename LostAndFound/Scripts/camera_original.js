@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     bs_input_file()
-    $("#savefind").click(function(){
+    $("#savefind").click(function () {
+        console.log("save find");
         saveImage();
     });
     $('#video').resize(function () {
@@ -29,7 +30,6 @@
         } catch (error) {
             video.src = null;
         }
-        debugger;
         var track = strr.getTracks()[0];  // if only one media track
         // ...
         track.stop();
@@ -70,8 +70,8 @@
             cache: false,
             processData: false,
             async: false,
-            url: "/Create/CreateFind",
-            data: formdata
+            url: "/Create/CreateFind2",
+            data: { formdata }
         }).done(function (o) {
             console.log('saved');
             // If you want the file to be visible in the browser 

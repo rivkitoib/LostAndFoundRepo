@@ -129,7 +129,10 @@ namespace LostAndFound.Controllers
             return PartialView();
         }
 
-
+        public ActionResult home()
+        {
+             return View();
+        }
 
 
     }

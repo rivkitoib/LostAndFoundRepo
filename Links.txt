@@ -11,3 +11,6 @@ https://asp.net-tutorials.com/misc/sending-mails/
 https://myaccount.google.com/lesssecureapps to let sending mails
 
 https://codepedia.info/upload-image-using-jquery-ajax-asp-net-c-sharp/
+
+https://www.nuget.org/packages/Microsoft.Azure.CognitiveServices.Search.ImageSearch/2.0.0
+
