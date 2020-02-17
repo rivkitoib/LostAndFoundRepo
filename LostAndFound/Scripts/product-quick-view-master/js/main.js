@@ -11,6 +11,7 @@ jQuery(document).ready(function($){
 			slectedImageUrl = selectedImage.attr('src');
 
 		$('body').addClass('overlay-layer');
+		$(this).parent('.cd-item').children('.cd-quick-view').addClass("viewed");
 		animateQuickView(selectedImage, sliderFinalWidth, maxQuickWidth, 'open');
 
 		//update the visible slider image in the quick view panel
@@ -32,13 +33,13 @@ jQuery(document).ready(function($){
 	});
 
 	//quick view slider implementation
-	$('.cd-quick-view').on('click', '.cd-slider-navigation a', function(){
+	$('.cd-quick-view.viewed').on('click', '.cd-slider-navigation a', function(){
 		updateSlider($(this));
 	});
 
 	//center quick-view on window resize
 	$(window).on('resize', function(){
-		if($('.cd-quick-view').hasClass('is-visible')){
+		if ($('.cd-quick-view.viewed').hasClass('is-visible')){
 			window.requestAnimationFrame(resizeQuickView);
 		}
 	});
@@ -54,7 +55,7 @@ jQuery(document).ready(function($){
 	}
 
 	function updateQuickView(url) {
-		$('.cd-quick-view .cd-slider li').removeClass('selected').find('img[src="'+ url +'"]').parent('li').addClass('selected');
+		$('.cd-quick-view.viewed .cd-slider li').removeClass('selected').find('img').parent('li').addClass('selected');
 	}
 
 	function resizeQuickView() {
@@ -67,11 +68,11 @@ jQuery(document).ready(function($){
 	} 
 
 	function closeQuickView(finalWidth, maxQuickWidth) {
-		var close = $('.cd-close'),
+		var close = $('.viewed .cd-close'),
 			activeSliderUrl = close.siblings('.cd-slider-wrapper').find('.selected img').attr('src'),
 			selectedImage = $('.empty-box').find('img');
 		//update the image in the gallery
-		if( !$('.cd-quick-view').hasClass('velocity-animating') && $('.cd-quick-view').hasClass('add-content')) {
+		if (!$('.cd-quick-view.viewed').hasClass('velocity-animating') && $('.cd-quick-view.viewed').hasClass('add-content')) {
 			selectedImage.attr('src', activeSliderUrl);
 			animateQuickView(selectedImage, finalWidth, maxQuickWidth, 'close');
 		} else {
@@ -99,7 +100,7 @@ jQuery(document).ready(function($){
 			//hide the image in the gallery
 			parentListItem.addClass('empty-box');
 			//place the quick view over the image gallery and give it the dimension of the gallery image
-			$('.cd-quick-view').css({
+			$('.cd-quick-view.viewed').css({
 			    "top": topSelected,
 			    "left": leftSelected,
 			    "width": widthSelected,
@@ -111,28 +112,28 @@ jQuery(document).ready(function($){
 			    'width': finalWidth+'px',
 			}, 1000, [ 400, 20 ], function(){
 				//animate the quick view: animate its width to the final value
-				$('.cd-quick-view').addClass('animate-width').velocity({
+				$('.cd-quick-view.viewed').addClass('animate-width').velocity({
 					'left': quickViewLeft+'px',
 			    	'width': quickViewWidth+'px',
 				}, 300, 'ease' ,function(){
 					//show quick view content
-					$('.cd-quick-view').addClass('add-content');
+						$('.cd-quick-view.viewed').addClass('add-content');
 				});
 			}).addClass('is-visible');
 		} else {
 			//close the quick view reverting the animation
-			$('.cd-quick-view').removeClass('add-content').velocity({
+			$('.cd-quick-view.viewed').removeClass('add-content').velocity({
 			    'top': finalTop+ 'px',
 			    'left': finalLeft+'px',
 			    'width': finalWidth+'px',
 			}, 300, 'ease', function(){
 				$('body').removeClass('overlay-layer');
-				$('.cd-quick-view').removeClass('animate-width').velocity({
+					$('.cd-quick-view.viewed').removeClass('animate-width').velocity({
 					"top": topSelected,
 				    "left": leftSelected,
 				    "width": widthSelected,
 				}, 500, 'ease', function(){
-					$('.cd-quick-view').removeClass('is-visible');
+							$('.cd-quick-view.viewed').removeClass('is-visible').removeClass('viewed');
 					parentListItem.removeClass('empty-box');
 				});
 			});
@@ -146,7 +147,7 @@ jQuery(document).ready(function($){
 
 		$('body').removeClass('overlay-layer');
 		parentListItem.removeClass('empty-box');
-		$('.cd-quick-view').velocity("stop").removeClass('add-content animate-width is-visible').css({
+		$('.cd-quick-view.viewed').velocity("stop").removeClass('add-content animate-width is-visible').css({
 			"top": topSelected,
 		    "left": leftSelected,
 		    "width": widthSelected,

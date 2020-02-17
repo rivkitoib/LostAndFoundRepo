@@ -228,6 +228,7 @@ header {
 		&.is-visible {
 			/* class added when user clicks on .cd-trigger */
 			visibility: visible;
+			
 		}
 
 		&.animate-width {
@@ -398,15 +399,15 @@ header {
 		opacity: 1;
 
 		h2 {
-			@include animation(cd-slide-in .3s);
+			@include animation(cd-slide-in .0s);
 		}
 
 		p {
-			@include animation(cd-slide-in .4s);
+			@include animation(cd-slide-in .1s);
 		}
 
 		.cd-item-action {
-			@include animation(cd-slide-in .5s);
+			@include animation(cd-slide-in .2s);
 		}
 	}
 }

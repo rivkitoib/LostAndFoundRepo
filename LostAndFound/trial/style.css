@@ -3,9 +3,11 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    direction:rtl;
-    text-align:center;
-
+    direction: rtl;
+    background-color: #874ca530;
+    background-image: url('../icons/Background.png');
+    overflow-y: hidden;
+    font-family: Tahoma !important;
 }
 div {
     text-align: center;
@@ -46,34 +48,39 @@ input[type=date]{
 .input1 {
     height: 5vh !important;
     border-radius: 25px !important;
+    border: solid black thin !important;
     padding-right: 1.5em !important;
     display: block !important;
     width: 20em !important;
     background: white !important;
     /* font-family: DanaYadAlefAlefAlef-Normal; */
-    font-size: 15px !important;
+    font-size: 30px !important;
     line-height: 1.5 !important;
     color: #666666 !important;
     margin: auto;
     margin-bottom: 1vh !important;
     position: relative !important;
     box-sizing: border-box !important;
+    text-align: center !important;
 }
 
 #updateTable {
-    width: 115em;
-   
+    width: 200em;
+    overflow-y: scroll;
+    height: 90vh;
+    position: relative;
+    left: 45em;
 }
 #containerSearchForm {
     right: 6em;
     border: solid #874ca5;
     height: 80vh;
-    width: 25em;
+    width: 40em;
     margin-top: 7vh;
     position: fixed;
 }
 #container2 {
-    right: 30em;
+    right: 50em;
 }
 .container_input {
   
@@ -94,15 +101,25 @@ input[type=date]{
     margin-right: 1em;
 }
 .cd-item {
-    height: 45vh;
+    height: 30vh;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 7px;
+    font-size: 180%;
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 0 17px 41px 0 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
 }
 
+/* On mouse-over, add a deeper shadow */
+.cd-item:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
 .cd-item-img-container {
-    height: 30vh;
+    height: 20vh;
 }
 
     .cd-item-img-container img {
@@ -210,3 +227,47 @@ input[type=date]{
     ::-webkit-scrollbar-thumb:hover {
         background: #874ca5;
     }
+.card-title{
+    font-size:200%;
+}
+.cd-item-info {
+    float: right;
+    width: 50%;
+    height: 100%;
+}
+.cd-slider {
+    margin-right: 0;
+    
+}
+.cd-slider-wrapper {
+    float: left;
+    width: 50%;
+    height: 100%;
+    border-right: solid #874ca5;
+}
+.info-data h3 {
+    color: #874ca5;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 41px;
+}
+.info-data label {
+    color: #874ca5;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: -50px;
+    margin-top: 20px;
+}
+.info-data p {
+    color: #874ca5;
+    font-size: 40px;
+}
+
+.finder-info {
+    margin-bottom: -60px !important;
+}
+
+.info-data {
+    position: relative;
+    top: 100px;
+}

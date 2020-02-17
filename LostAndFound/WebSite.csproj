@@ -110,6 +110,17 @@
     <Content Include="Controllers\drag.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="icons\Background.png" />
+    <Content Include="icons\camera.png" />
+    <Content Include="icons\category.png" />
+    <Content Include="icons\date.png" />
+    <Content Include="icons\file.png" />
+    <Content Include="icons\Flowers.jpg" />
+    <Content Include="icons\location.png" />
+    <Content Include="icons\name.png" />
+    <Content Include="icons\notes.png" />
+    <Content Include="icons\send.png" />
+    <Content Include="icons\subCategory.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />

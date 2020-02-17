@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<LostAndFound.Models.Find>
+<script src="~/Scripts/product-quick-view-master/js/main.js"></script>
 <ul class="cd-items cd-container card">
     @foreach (var item in ViewBag.tbl)
     {
@@ -13,30 +14,22 @@
                 <div>@item.description</div>
             </div>
             <a href="#0" class="cd-trigger">Quick View</a>
+
+            <div class="cd-quick-view">
+                <div class="cd-slider-wrapper">
+                    <ul class="cd-slider">
+                        <li class="selected">
+                            <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="cd-item-info">
+                </div>
+                <a href="#0" class="cd-close">Close</a>
+            </div>
         </li>
 
 
     }
 </ul>
-<div class="cd-quick-view">
-    <div class="cd-slider-wrapper">
-        <ul class="cd-slider">
-            <li class="selected">
-                @*<img src="@item.picture" alt="Item Preview" />*@
-                <img src="~/icons/tempLogo.JPG" alt="Item Preview" />
 
-            </li>
-
-
-        </ul> <!-- cd-slider -->
-        @*<ul class="cd-slider-navigation">
-                <li><a class="cd-next" href="#0">Prev</a></li>
-                <li><a class="cd-prev" href="#0">Next</a></li>
-            </ul>*@ <!-- cd-slider-navigation -->
-    </div> <!-- cd-slider-wrapper -->
-
-    <div class="cd-item-info">
-
-    </div> <!-- cd-item-info -->
-    <a href="#0" class="cd-close">Close</a>
-</div>
