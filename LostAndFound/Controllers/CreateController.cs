@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -61,7 +62,7 @@ namespace LostAndFound.Controllers
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase importFile)
         {
-            
+
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
             var imgBase64 = GetPropertyValue("imagedata");
@@ -103,7 +104,8 @@ namespace LostAndFound.Controllers
             }
             if (specifiedImgae)
             {
-                var imageToEdit = new Bitmap(fullPath);
+               var imageToEdit = new Bitmap(fullPath);
+               
                 var info = GetPropertyValue("coverInfo").Split(';');
 
                 int x = int.Parse(info[2]), width = int.Parse(info[1]), y = int.Parse(info[3]), height = int.Parse(info[0]);
@@ -112,10 +114,12 @@ namespace LostAndFound.Controllers
                     for (int y1 = y; y1 < y + height; y1++)
                         imageToEdit.SetPixel(x, y1, color);
                 fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], "DB_" + filename);
-                imageToEdit.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                   imageToEdit.Save(fullPath,ImageFormat.Jpeg);   
+                  
+                              
             }
             CreateFindInDB(fullPath);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
         [HttpPost]
         public ActionResult CreateFind(HttpPostedFileBase importFile)
@@ -177,6 +181,10 @@ namespace LostAndFound.Controllers
                 Console.WriteLine(ex.InnerException);
                 throw;
             }
+            if (newFind.email != "")
+                SendMail.sendFinderFind(newFind);
+
+
         }
 
         [HttpPost]

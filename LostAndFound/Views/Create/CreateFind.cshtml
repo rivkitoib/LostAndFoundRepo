@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
-@*<script src="~/Scripts/imported/jquery-3.4.1.min.js"></script>*@
+<script src="~/Scripts/imported/jquery-3.4.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 @*<script src="~/Scripts/imported/jquery-ui.min.js"></script>*@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
@@ -122,7 +122,6 @@
                     </div>
                     <canvas id='canvas' name="webCamPicture" class="imagePlace"></canvas>
                     <div id="control">
-
                         <a id='retake'><i class="fas fa-sync-alt"></i></a>
                         <a id='snap'><i class="fas fa-check"></i></a>
 
@@ -138,11 +137,17 @@
 
     @*<img src="image.png" id="background" alt="רקע לא נמצא" />*@
 
-<div id="container4" class="container_">סימן- הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו
-   הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"</div>
+    <div id="container4" class="container_">
+        סימן- הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו
+        הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"
+    </div>
     <button type="submit" id="saveFind" title="שמור מציאה"><i class="fas fa-angle-left"></i></button>
     @*<input type="submit" id="saveFind" class="ui-button" value="שמור מציאה" />*@
 </form>
+<div>
+
+    @Html.ActionLink("בית", "Home", "home")
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

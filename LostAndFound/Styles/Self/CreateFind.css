@@ -183,7 +183,7 @@ input[type=date]{
 .fa-angle-left:before {
     content: "\f104";
     height: 3vh;
-    font-size: 4vh;
+    font-size: 13vh;
     color: purple;
 }
 #saveFind {

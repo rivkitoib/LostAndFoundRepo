@@ -125,6 +125,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Controllers\drag.js" />
+    <Content Include="eMail\devek.png" />
+    <Content Include="eMail\page.html" />
+    <Content Include="eMail\WIN_20200108_12_55_39_Pro.jpg" />
+    <Content Include="eMail\לוגו.JPG" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -260,6 +264,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Create\CreateFind2.cshtml" />
     <Content Include="Views\Create\estie.cshtml" />
+    <Content Include="Views\Home\home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
