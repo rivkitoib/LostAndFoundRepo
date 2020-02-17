@@ -109,6 +109,17 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="icons\Background.png" />
+    <Content Include="icons\camera.png" />
+    <Content Include="icons\category.png" />
+    <Content Include="icons\date.png" />
+    <Content Include="icons\file.png" />
+    <Content Include="icons\Flowers.jpg" />
+    <Content Include="icons\location.png" />
+    <Content Include="icons\name.png" />
+    <Content Include="icons\notes.png" />
+    <Content Include="icons\send.png" />
+    <Content Include="icons\subCategory.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />
@@ -121,16 +132,41 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="icons\432.jpg" />
+    <Content Include="icons\tempLogo.JPG" />
+    <Content Include="Scripts\css\.DS_Store" />
+    <Content Include="Scripts\css\bootstrap-grid.css.map" />
+    <Content Include="Scripts\css\bootstrap-grid.min.css.map" />
+    <Content Include="Scripts\css\bootstrap-reboot.css.map" />
+    <Content Include="Scripts\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Scripts\css\bootstrap.css.map" />
+    <Content Include="Scripts\css\bootstrap.min.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap-combined.min.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\css\bootstrap-grid.css" />
+    <Content Include="Scripts\css\bootstrap-grid.min.css" />
+    <Content Include="Scripts\css\bootstrap-reboot.css" />
+    <Content Include="Scripts\css\bootstrap-reboot.min.css" />
+    <Content Include="Scripts\css\bootstrap.css" />
+    <Content Include="Scripts\css\bootstrap.min.css" />
     <Content Include="Scripts\font-awesome.css" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\Jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery-ui.min.css" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\Jquery.js" />
@@ -142,14 +178,35 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Styles\CreateFind.css" />
+    <Content Include="Scripts\product-quick-view-master\.gitignore" />
+    <Content Include="Scripts\product-quick-view-master\css\css.css" />
+    <Content Include="Scripts\product-quick-view-master\css\reset.css" />
+    <Content Include="Scripts\product-quick-view-master\css\style.css" />
+    <Content Include="Scripts\product-quick-view-master\img\item-1.jpg" />
+    <Content Include="Scripts\product-quick-view-master\img\item-2.jpg" />
+    <Content Include="Scripts\product-quick-view-master\img\item-3.jpg" />
+    <Content Include="Scripts\product-quick-view-master\index.html" />
+    <Content Include="Scripts\product-quick-view-master\js\jquery-2.1.1.js" />
+    <Content Include="Scripts\product-quick-view-master\js\main.js" />
+    <Content Include="Scripts\product-quick-view-master\js\modernizr.js" />
+    <Content Include="Scripts\product-quick-view-master\js\velocity.min.js" />
+    <Content Include="Scripts\searchPage.js" />
+    <Content Include="trial\email.ico" />
+    <Content Include="trial\image.png" />
+    <Content Include="trial\page.html" />
+    <Content Include="trial\style.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\addFindController.cs" />
+    <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\phoneCall.cs" />
@@ -172,6 +229,19 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\CreateFind.cshtml" />
+    <Content Include="Views\Home\SearchFinds.cshtml" />
+    <Content Include="Views\Home\defineCategories.cshtml" />
+    <Content Include="Views\Administrator\Administrator.cshtml" />
+    <Content Include="Views\Administrator\headCategoryRecord.cshtml" />
+    <Content Include="Views\Home\AdministratorSettings.cshtml" />
+    <Content Include="Scripts\product-quick-view-master\js\velocity-LICENSE.md" />
+    <Content Include="Scripts\product-quick-view-master\partials\_layout.scss" />
+    <Content Include="Scripts\product-quick-view-master\partials\_mixins.scss" />
+    <Content Include="Scripts\product-quick-view-master\partials\_variables.scss" />
+    <Content Include="Scripts\product-quick-view-master\README.md" />
+    <Content Include="Scripts\product-quick-view-master\scss\style.scss" />
+    <Content Include="Views\Create\CreateFind.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
@@ -185,6 +255,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Create\" />
+    <Folder Include="Views\addFind\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

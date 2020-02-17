@@ -13,7 +13,7 @@ namespace LostAndFound.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     [Serializable]
-    public partial class Archive
+    public partial class Find
     {
         public int id { get; set; }
 
@@ -47,16 +47,26 @@ namespace LostAndFound.Models
                     ErrorMessage = "הזן מספר טלפון תקין")]
         [Display(Name = "טלפון")]
         public string cellphone { get; set; }
-
+       
         [Required]
         [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",
                     ErrorMessage = "הזן כתובת מייל תקינה")]
         [Display(Name = "כתובת מייל")]
         public string email { get; set; }
-        
-        [Display(Name = "האם הושב")]
-        public bool status { get; set; }
-        [Display(Name = "תאריך השבה")]
-        public System.DateTime dateStatus { get; set; }
+   
+        public static Find convertarchiveToFind(Archive archive)
+        {
+            Find find = new Find();
+            find.notes = archive.notes;
+            find.id = archive.id;
+            find.location = archive.location;
+            find.subCategory = archive.subCategory;
+            find.cellphone = archive.cellphone;
+            find.dateFound = archive.dateFound;
+            find.email = archive.email;
+            find.finderName = archive.finderName;
+            find.picture = archive.picture;
+            return find;
+        }
     }
 }

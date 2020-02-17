@@ -29,6 +29,7 @@ namespace LostAndFound.Controllers
 
                          select new View()
                          {
+                             picture=f.picture,
                              id = f.id,
                              idSubCategory = f.subCategory.id,
                              name = f.finderName,
@@ -49,7 +50,7 @@ namespace LostAndFound.Controllers
             }
 
             List<string> lsName = new List<string>();
-            if (category != "הכל")
+            if (category != "בחר קטגוריה")
             {
                 int id = DB.headCategories.First(x => x.Name == category).Id;
                 var ls = DB.subCategories.Where(x => x.headCategory.Id == id).ToList();
@@ -79,25 +80,20 @@ namespace LostAndFound.Controllers
             }
 
             //sorting by place
-            if (place != "הכל")
+            if (place != "הכל" && place != "בחר מקום")
             {
                 findsFilterQuery = findsFilterQuery.Where(x => x.location.PlaceOrEvent.Equals(place));
             }
             //sorting by category or subCategory
-            if (hiddenCategory != null && hiddenCategory != "הכל")
+            if (hiddenCategory != null && hiddenCategory != "הכל"&& hiddenCategory != "בחר קטגוריה" )
             {
-                if (subCategory != "הכל")
+                if (subCategory != "הכל" && subCategory != "בחר תת קטגוריה")
                 {
                     findsFilterQuery = findsFilterQuery.Where(x => x.subCategory.name.Equals(subCategory));
                 }
                 else
                 {
-                    var subCategoriesFilter = DB.subCategories.Where(x => x.headCategory.Name.Equals(hiddenCategory));
-
-                    findsFilterQuery = from a in subCategoriesFilter
-                                       join b in findsFilterQuery
-                                       on a.id equals b.subCategory.id
-                                       select b;
+                    findsFilterQuery = findsFilterQuery.Where(x => x.subCategory.headCategory.Name.Equals(hiddenCategory));
                 }
             }
             //sorting by date
@@ -113,6 +109,7 @@ namespace LostAndFound.Controllers
 
             var filteredFinds = findsFilterQuery.Select(f => new View()
             {
+                picture=f.picture,
                 id = f.id,
                 idSubCategory = f.subCategory.id,
                 name = f.finderName,
