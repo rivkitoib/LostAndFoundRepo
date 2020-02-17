@@ -22,13 +22,23 @@ namespace LostAndFound.Controllers
 
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
             mail.To.Add(to);
-            mail.From = new MailAddress(from, "והשבות", System.Text.Encoding.UTF32);
+            mail.From = new MailAddress(from, ":)", System.Text.Encoding.UTF32);
             mail.Subject = "This is a test mail";
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
             mail.Body = "Hi Tzippy! \\nSay hello!";
             mail.BodyEncoding = System.Text.Encoding.UTF8;
             mail.IsBodyHtml = true;
             mail.Priority = MailPriority.High;
+
+         
+            var pathToImage = "C:\\Users\\1000270290\\Documents\\MVC\\LostAndFound\\LostAndFound\\Images\\Background.png";
+            ContentType c = new ContentType(pathToImage); 
+            Stream s = new Stream(pathToImage);
+            Attachment img = new Attachment(pathToImage,c);
+            var path = "C:\\Users\\1000270290\\Documents\\MVC\\trial2\\page.htm";
+            string Body = System.IO.File.ReadAllText(path);
+            img.Name = "תמונה מקורית";
+            mail.Attachments.Add(img);
 
             SmtpClient client = new SmtpClient();
 
@@ -39,6 +49,7 @@ namespace LostAndFound.Controllers
             try
             {
                 client.Send(mail);
+            
             }
             catch (Exception ex)
             {

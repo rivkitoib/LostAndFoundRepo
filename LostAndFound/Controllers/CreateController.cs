@@ -26,6 +26,7 @@ namespace LostAndFound.Controllers
         [HttpGet]
         public ActionResult CreateFind()
         {
+            SendMail.send();
             ViewBag.headCategories = DB.headCategories.ToList();
             ViewBag.locations = DB.locations.ToList();
             ViewBag.sub = getSubCategories(1);
