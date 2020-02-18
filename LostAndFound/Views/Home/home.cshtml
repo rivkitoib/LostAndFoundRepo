@@ -1,18 +1,115 @@
 ﻿@{
-   ViewBag.Title = "home";
+    ViewBag.Title = "home";
 }
-<h2>home</h2>
 
-<div>
+    <style>
+        body{
+color:purple;  font-family:Tahoma; 
+        }
+        .card-container {
+            cursor: pointer;
+            height: 40em;
+            perspective: 600;
+            position: relative;
+            width: 25em;
+            display: inline-block;
+            margin-top: 3%;
+        }
 
-    @Html.ActionLink("הוסף מציאה", "CreateFind", "Create")
-</div>
+        .card {
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: all 1s ease-in-out;
+            width: 100%;
+        }
 
-<div>
-    @Html.ActionLink("חפש אבידה", "Index", "Home")
-</div>
+            .card:hover {
+                transform: rotateY(180deg);
+            }
 
-<div>
-    @Html.ActionLink("הגדרות מערכת", "Admin", "Settings")
-</div>
+            .card .side {
+                backface-visibility: hidden;
+                border-radius: 6px;
+                /* height: 100%; */
+                position: absolute;
+                overflow: hidden;
+                width: 100%;
+            }
+
+            .card .back {
+                background: #ffffff;
+                color: purple;
+                line-height: 150px;
+                text-align: center;
+                transform: rotateY(180deg);
+                height: 106%;
+                border: solid purple;
+            }
+
+        .logo {
+            position: absolute;
+            bottom: 0;
+            left: 5em;
+            width: 15em;
+        }
+
+        .imgs {
+            width: 108%;
+        }
+
+        #page1 {
+            right: -13%;
+        }
+
+        #page2 {
+            left: -3%;
+        }
+
+        #page3 {
+            left: -17%;
+        }
+    </style>
+    <div id="page1" class="card-container">
+       
+        <div class="card">
+            <div class="side">
+                <img src="~/Images/search.png" class="imgs" />
+            </div>
+            <div class="side back">
+
+                <h2>חיפוש</h2>
+                @Html.ActionLink("<-", "Index", "Home")
+                <h4>בדף זה תוכל לצפות במציאות הקימות, באפשרותך לסנן לפי פרמטרים מועדפים ובמידת הצורך ליצור קשר עם המפרסם</h4>
+                <img src="~/Images/לוגו.JPG" class="logo" />
+           
+            </div>
+        </div>
+    </div>
+    <div id="page2" class="card-container">
+        <div class="card">
+            <div class="side">
+                <img src="~/Images/addFind.png" class="imgs" />
+            </div>
+            <div class="side back">
+                <h2>הוסף מציאה</h2>
+                @Html.ActionLink("<-", "CreateFind", "Create")
+                <h4>כאן תוסיף את פרטי המציאה שמצאת</h4>
+                <img src="~/Images/לוגו.JPG" class="logo" />
+            </div>
+        </div>
+    </div>
+    <div id="page3" class="card-container">
+        <div class="card">
+            <div class="side">
+                <img src="~/Images/Setting.png" class="imgs" />
+            </div>
+            <div class="side back">
+                <h2>הגדרות מערכת</h2>
+                @Html.ActionLink("<-", "Admin", "Settings")
+                <h4>ניהול המערכת, הגדרות ונתונים. לתשומת לב: דף זה זמין למשתמשים מורשים בלבד</h4>
+                <img src="~/Images/לוגו.JPG" class="logo" />
+            </div>
+        </div>
+    </div>
 

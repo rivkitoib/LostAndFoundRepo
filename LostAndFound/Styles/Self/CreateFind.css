@@ -84,7 +84,11 @@ input[type=date]{
 }
 #container4 {
     right: 90em;
-    background-color:white;
+    background-color: #ffffff75;
+    text-align: center;
+    font-family: 'miriwin-webfont';
+    font-weight: 700;
+    color: black;
 }
 .container_input {
 }
@@ -151,14 +155,6 @@ input[type=date]{
     height: 7vh;
 }
 
-#snap {
-  
-}
-
-#retake {
-   
-}
-
 
     .hov:hover {
         opacity: 1;
@@ -180,7 +176,7 @@ input[type=date]{
     top: 32em;
 }
 /*//buttom*/
-.fa-angle-left:before {
+.fa-check:before {
     content: "\f104";
     height: 3vh;
     font-size: 13vh;
@@ -194,4 +190,10 @@ input[type=date]{
     outline: none;
     background-color: #ffffff00;
     border: none;
+}
+.text {
+    margin: 4%;
+    margin-top: 6%;
+    margin-bottom: 22%;
+    line-height: 179%;
 }
