@@ -13,6 +13,10 @@ Primary style
   content: '';
 }
 
+@font-face {
+    font-family: 'miriwin-webfont';
+    src: url('../../../fonts/miriwin-webfont.ttf') format('truetype');
+}
 body {
   font-size: 100%;
   font-family: "PT Sans", sans-serif;
@@ -140,7 +144,7 @@ header h1 {
 }
 @media only screen and (min-width: 1024px) {
   .cd-item {
-    width: 14em;
+    width: 7em;
     float: left;
     margin: 0 3% 2.8em 0;
   }
@@ -164,7 +168,7 @@ header h1 {
 .cd-trigger {
     text-decoration: none;
     position: absolute;
-    height: 120px;
+    height: 60px;
     line-height: 50px;
     width: 100%;
     bottom: 0;
@@ -179,12 +183,14 @@ header h1 {
     -webkit-transition: opacity 0.2s, background-color 0.2s;
     -moz-transition: opacity 0.2s, background-color 0.2s;
     transition: opacity 0.2s, background-color 0.2s;
+    font-size: 15px;
 }
 .no-touch .cd-trigger:hover {
     background: #874ca5;
     opacity: 0.4;
     color: black;
-    font-size: 40px;
+    font-size: 15px;
+    font-weight:600;
 }
 @media only screen and (min-width: 1024px) {
   .cd-trigger {
@@ -217,8 +223,8 @@ header h1 {
     .cd-quick-view {
         display: block;
         position: fixed;
-        width: 1500px !important;
-        height: 900px;
+        width: 710px !important;
+        height: 450px;
         visibility: hidden;
         /* Force Hardware Acceleration in WebKit */
         -webkit-transform: translateZ(0);
@@ -394,6 +400,7 @@ header h1 {
     float: right;
     width: 50%;
     height: 100%;
+    overflow-x:hidden;
 }
 .cd-item-info h2 {
   font-size: 28px;
@@ -401,7 +408,7 @@ header h1 {
 }
 .cd-item-info p {
   line-height: 1.6;
-  margin: 1em 0;
+  margin: 0em 0;
   color: #67919c;
 }
 .cd-item-info .cd-item-action li {
@@ -552,4 +559,10 @@ header h1 {
 .cd-items cd-container card {
     height:90vh;
     overflow-y: scroll;
+}
+.icon-search {
+    width: 40px;
+    display: inline-block;
+    background-color: #bfd9f5a6;
+    border-radius:50%;
 }

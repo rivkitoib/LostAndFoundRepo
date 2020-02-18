@@ -64,6 +64,7 @@ namespace LostAndFound.Controllers
         {
 
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
+            string dbFileName = "DB_" + filename;
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
             var imgBase64 = GetPropertyValue("imagedata");
             bool specifiedImgae = true;
@@ -113,35 +114,15 @@ namespace LostAndFound.Controllers
                 for (; x < width; x++)
                     for (int y1 = y; y1 < y + height; y1++)
                         imageToEdit.SetPixel(x, y1, color);
-                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], "DB_" + filename);
+                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], dbFileName);
                    imageToEdit.Save(fullPath,ImageFormat.Jpeg);   
                   
                               
             }
-            CreateFindInDB(fullPath);
+            CreateFindInDB(dbFileName);
             return RedirectToAction("Index", "Home");
         }
-        [HttpPost]
-        public ActionResult CreateFind(HttpPostedFileBase importFile)
-        {
-            var filename = $"{Guid.NewGuid().ToString()}.jpg";
-            var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
-            var imgBase64 = Request.Form.GetValues("imagedata").FirstOrDefault();
-            if (!string.IsNullOrEmpty(imgBase64))
-            {
-                var imageData = imgBase64.Split(',')[1];
-                var bytes = Convert.FromBase64String(imageData);
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-                    image = Image.FromStream(ms);
-                }
-                image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-            }
-            CreateFindInDB(fullPath);
-            return View();
-        }
+
         private string GetPropertyValue(string propName, string defval = "")
         {
             var v = Request.Form.GetValues(propName).FirstOrDefault() ?? defval;
@@ -170,7 +151,7 @@ namespace LostAndFound.Controllers
             newFind.cellphone = GetPropertyValue("cellphone");
             newFind.description = GetPropertyValue("description");
             newFind.email = GetPropertyValue("email");
-            newFind.picture = pathToImage;
+            newFind.picture = Path.Combine("~\\Images\\ForDB", pathToImage);
             DB.finds.Add(newFind);
             try
             {
@@ -181,8 +162,8 @@ namespace LostAndFound.Controllers
                 Console.WriteLine(ex.InnerException);
                 throw;
             }
-            if (newFind.email != "")
-                SendMail.sendFinderFind(newFind);
+            //if (newFind.email != "")
+            //    SendMail.sendFinderFind(newFind);
 
 
         }
