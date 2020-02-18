@@ -100,6 +100,12 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Twilio">
+      <HintPath>..\packages\Twilio.5.37.4\lib\net451\Twilio.dll</HintPath>
+    </Reference>
+    <Reference Include="Twilio.AspNet.Mvc">
+      <HintPath>..\packages\Twilio.AspNet.Mvc.5.33.1\lib\net451\Twilio.AspNet.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\EASendMail.dll" />
@@ -222,25 +228,6 @@
     <Content Include="Images\Icons\phone.png" />
     <Content Include="Images\Icons\send.png" />
     <Content Include="Images\Icons\subCategory.png" />
-    <Content Include="Images\Original\07e7a89f-8bdf-4100-8316-9163edfa1823.jpg" />
-    <Content Include="Images\Original\09bc4a27-a139-4365-985c-9db36485fc86.jpg" />
-    <Content Include="Images\Original\2f237651-b9e1-457d-9d00-ab44222424bb.jpg" />
-    <Content Include="Images\Original\3c44b765-e8a9-4b03-86d4-cc976a281aad.jpg" />
-    <Content Include="Images\Original\42a89536-d712-4951-80ae-2d2d2282c327.jpg" />
-    <Content Include="Images\Original\53cecabb-0e2a-4160-bbc0-b1491367b2e1.jpg" />
-    <Content Include="Images\Original\5bfb6421-a722-42cc-8f80-46243c9a7d0c.jpg" />
-    <Content Include="Images\Original\6ce46109-0686-4155-ae0a-6917fa6a6e13.jpg" />
-    <Content Include="Images\Original\7d67db94-65f5-4348-ad9f-9294b638edc6.jpg" />
-    <Content Include="Images\Original\84872cda-ccef-471d-ad71-a06bd0a701c7.jpg" />
-    <Content Include="Images\Original\8b5259a7-e22b-4f2a-9cee-f5a0d816d483.jpg" />
-    <Content Include="Images\Original\9334fc87-a849-4f06-85b5-cc9e80c35779.jpg" />
-    <Content Include="Images\Original\94db5dec-9401-44ea-b097-825ae1df8f62.jpg" />
-    <Content Include="Images\Original\9fe4e999-9aae-4171-9db4-3e0f49a69983.jpg" />
-    <Content Include="Images\Original\a0cd46bf-21af-4e2c-81f5-2568f1f24ba6.jpg" />
-    <Content Include="Images\Original\aa8081e1-8eee-4fd9-b7a0-13866ad8afba.jpg" />
-    <Content Include="Images\Original\b18180c3-1dc4-438c-99c8-fa023e0b6bde.jpg" />
-    <Content Include="Images\Original\db0af8c6-ad64-4c27-9d7c-f13752b55f13.jpg" />
-    <Content Include="Images\Original\e52306b0-080f-4d35-a7d3-af91ee86f69a.jpg" />
     <Content Include="Images\לוגו.JPG" />
     <Content Include="obj\Debug\LostAndFound.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\LostAndFound.dll" />
@@ -323,6 +310,9 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="fonts\miriwin-webfont.ttf" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -373,6 +363,7 @@
     <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\phoneCall.cs" />
     <Compile Include="Controllers\SendMail.cs" />
+    <Compile Include="Crypto\Hash256.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -408,7 +399,6 @@
     <Content Include="Views\Create\CreateFind.cshtml" />
     <Content Include="Views\Create\CreateFind2.cshtml" />
     <Content Include="Views\Create\estie.cshtml" />
-    <Content Include="Views\Home\CreateFind.cshtml" />
     <Content Include="Views\Home\defineCategories.cshtml" />
     <Content Include="Views\Home\home.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
@@ -419,6 +409,9 @@
     <Content Include="Scripts\product-quick-view-master\partials\_variables.scss" />
     <Content Include="Scripts\product-quick-view-master\README.md" />
     <Content Include="Scripts\product-quick-view-master\scss\style.scss" />
+    <Content Include="Views\Administrator\Index.cshtml" />
+    <Content Include="Views\Administrator\Login.cshtml" />
+    <Content Include="Views\Administrator\Unauthorized.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -429,6 +422,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\ForDB\" />
+    <Folder Include="Images\Original\" />
     <Folder Include="obj\Debug\TempPE\" />
     <Folder Include="Views\addFind\" />
   </ItemGroup>

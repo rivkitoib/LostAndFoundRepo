@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "הגדרות מנהל";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <link href="~/Styles/Self/CreateFind.css" rel="stylesheet" />
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <title></title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+
+        $("#loginForm").submit(function (e) {
+            e.preventDefault();
+        });
+
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("Login", "Administrator", FormMethod.Post))
+    {
+            <div class="containersAdmin" id="places" dir="rtl">
+                <h3 class="container_title">זיהוי מנהל</h3>
+                <div class="scrollSettingsContainer">
+                    <div id="wrapUlPlaces">
+                        <label>הזן סיסמה:</label>
+                        <input name="password" type="password" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="submit">
+
+                <button type="submit">
+                    <i class="fas fa-check" id="submit-check-settings"></i>
+                </button>
+
+            </div>
+        }
+    </body>
+</html>
+
+
