@@ -1,71 +1,35 @@
 ﻿@model IEnumerable<LostAndFound.Models.Find>
+<script src="~/Scripts/product-quick-view-master/js/main.js"></script>
+<ul class="cd-items cd-container card">
+    @foreach (var item in ViewBag.tbl)
+    {
 
-    <table class="table">
+        <li class="cd-item">
+            <div class="cd-item-img-container">
+                <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+            </div>
+            <div style="background-color:ghostwhite">
+                <h4 class="card-title">@item.subcategoryname</h4>
+                <div>@item.subcategoryname</div>
+                <div>@item.description</div>
+            </div>
+            <a href="#0" class="cd-trigger">Quick View</a>
 
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.subCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateFound)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.finderName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cellphone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in ViewBag.tbl)
-        {
-            <tr>
-                <td>
-                    @item.subcategoryname
-                </td>
-                <td>
-                    @item.description
-                </td>
-                <td>
-                    ""
-                </td>
-                <td>
-                    @item.PlaceOrEvent
-                </td>
-                <td>
-                    @item.date
-                </td>
+            <div class="cd-quick-view">
+                <div class="cd-slider-wrapper">
+                    <ul class="cd-slider">
+                        <li class="selected">
+                            <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="cd-item-info">
+                </div>
+                <a href="#0" class="cd-close">Close</a>
+            </div>
+        </li>
 
-                <td>
-                    @item.notes
-                </td>
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.cellphone
-                </td>
-                <td>
-                    @item.email
-                </td>
-            </tr>
 
-        }
-    </table>
-
+    }
+</ul>
 

@@ -3,27 +3,19 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<link href="~/Scripts/font-awesome.css" rel="stylesheet" />
-<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+<link href="~/trial/style.css" rel="stylesheet" />
+<link href="~/Scripts/product-quick-view-master/css/css.css" rel="stylesheet" />
+<link href="~/Scripts/product-quick-view-master/css/reset.css" rel="stylesheet" />
+<link href="~/Scripts/product-quick-view-master/css/style.css" rel="stylesheet" />
+<script src="js/modernizr.js"></script>
+<script src="~/Scripts/product-quick-view-master/js/jquery-2.1.1.js"></script>
+<script src="~/Scripts/product-quick-view-master/js/velocity.min.js"></script>
+<script src="~/Scripts/product-quick-view-master/js/main.js"></script>
 
-<style>
-    .fold {
-        padding: 0 18px;
-        display: none;
-        background-color: white;
-        overflow: hidden;
-    }
-
-    .active {
-        display: inline-block
-    }
-</style>
-<script src="~/Scripts/searchPage.js"></script>
 <script>
-    
-$(document).ready(function () {
+    $(document).ready(function () {
     dateDefaultValues = function () {
         year = @DateTime.Now.Year;
         month = @DateTime.Now.Month;
@@ -63,140 +55,145 @@ $(document).ready(function () {
 
 
         });
-
-    });
-    $(function () {
-        $("table tr.view").on("click", function () {
-            $(this).next(".fold").toggleClass("active");
-        });
-    })
-});
+            });
+   });
 </script>
-<p>
-   
-    @Html.ActionLink("הוסף מציאה", "CreateFind","Create")
-</p>
-<form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
-    <label>קטגוריה</label>
-    <select id="category" name="category">
+@*<img src="~/trial/image.png" id="background" alt="רקע לא נמצא" />*@
+<html>
+<body>
+    @*<img src="~/icons/432.jpg" id="background" alt="רקע לא נמצא" />*@
+    @*<p>
 
-        <option>הכל</option>
-        @foreach (var item in ViewBag.category)
-        {
-            <option>@item.Name</option>
-        }
-    </select>
-</form>
-@using (Ajax.BeginForm("SearchFinds", new AjaxOptions()
-{
-    UpdateTargetId = "updateTable",
-    HttpMethod = "GET",
-    InsertionMode = InsertionMode.Replace
+        @Html.ActionLink("הוסף מציאה", "CreateFind", "Create")
+    </p>*@
 
-}))
-{
-    <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
+    <div id="containerSearchForm" @*class="containerx"*@>
 
-    <label>תת קטגוריה</label>
-    <select id="subCategories" name="subCategory">
-        <option>הכל</option>
-        @if (Model != null)
-        {
-            foreach (var item in Model)
+        <div id="wrapSearchForm">
+            <form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
+                <select id="category" name="category" class="input1">
+                    <option>בחר קטגוריה</option>
+                    @foreach (var item in ViewBag.category)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+            </form>
+            @using (Ajax.BeginForm("SearchFinds", new AjaxOptions()
             {
-                <option>@item</option>
+                UpdateTargetId = "updateTable",
+                HttpMethod = "GET",
+                InsertionMode = InsertionMode.Replace
+
+            }))
+            {
+
+                <img style="height:25px" src="~/trial/email.ico" />
+
+
+                <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
+
+                <select id="subCategories" name="subCategory" class="input1">
+                    <option>בחר תת קטגוריה</option>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
+                            <option>@item</option>
+                        }
+
+                    }
+                </select>
+                <img style="height:25px" src="~/trial/email.ico" />
+                <select id="place" name="place" class="input1">
+                    <option>בחר מקום</option>
+                    @foreach (var item in ViewBag.place)
+                    {
+                        <option>@item.PlaceOrEvent</option>
+                    }
+                </select>
+                <img style="height:25px" src="~/trial/email.ico" />
+                <input id="fromDate" type="date" name="fromDate" class="input1" />
+                <input id="dateNow" type="date" name="toDate" class="input1" />
+                <img style="height:25px" src="~/trial/email.ico" />
+                <input type="text" placeholder="טקסט חופשי" name="text" class="input1" />
+                <img style="height:25px" src="~/trial/email.ico" />
+                <div class="input1">
+                    <label class="containerCheckbox">
+                        חפש גם בארכיון
+                        <input id="searchArchive" type="checkbox" name="searchArchive" value="true">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                @*<div class="row"><input type="checkbox" id="searchArchive" name="searchArchive" value="true" class=" col-md-4" /><label class="col-md-4">חיפוש בארכיון</label></div>*@
+                <input type="submit" class="input1" value="סנן" />
+
             }
+        </div>
+    </div>
+    <div id="updateTable">
+        
+        <ul class="cd-items cd-container card">
+            @foreach (var item in ViewBag.tbl)
+            {
 
-        }
-    </select>
+            <li class="cd-item">
 
-    <label>מקום</label>
-    <select id="place" name="place">
-        <option>הכל</option>
-        @foreach (var item in ViewBag.place)
-        {
-            <option>@item.PlaceOrEvent</option>
-        }
-    </select>
-    <label>החל מ</label>
-    <input id="fromDate" type="date" name="fromDate" />
-    <label>עד</label>
-    <input id="dateNow" type="date" name="toDate"/>
-    <label>טקסט חופשי</label>
-    <input type="text" name="text" />
-    <input type="checkbox" id="searchArchive" name="searchArchive" value="true" />
-    <input type="submit" value="סנן" />
+                <div class="cd-item-img-container">
+                    <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                </div>
+                <div style="background-color:ghostwhite">
+                    <h4 class="card-title">@item.description</h4>
+                    <div>@item.subcategoryname</div>
+                </div>
+                <a href="#0" class="cd-trigger">הצג פרטים</a>
+                
+        
+                <div class="cd-quick-view">
+                    <div class="cd-slider-wrapper">
+                        <ul class="cd-slider">
+                            <li class="selected">
+                                <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="cd-item-info">
+                        <div class="info-data">
+                            <div>
 
-}
-<h2>לוח מציאות</h2>
+                                <h3>@item.description</h3>
+                            </div>
+                            <div>
+                                <label>נמצא בתאריך:</label>
+                                <p>@item.date</p>
+                            </div>
+                            <div>
+                                <label>נמצא ב:</label>
+                                <p>@item.PlaceOrEvent</p>
+                            </div>
+                            <div>
+                                <label>הערות:</label>
+                                <p>@item.notes</p>
+                            </div>
+                            <div>
+                                <label>פרטי מוצא:</label>
+                                <p class="finder-info">@item.name</p>
+                                <p class="finder-info">@item.email</p>
+                                <p class="finder-info">@item.cellphone</p>
+                            </div>
+                        </div>
 
-<div id="updateTable">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.subCategory)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.location)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dateFound)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.finderName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cellphone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in ViewBag.tbl)
-        {
-            <tr class="clickableAccordion">
-                <td>
-                    @item.subcategoryname
-                </td>
-                <td>
-                    @item.description
-                </td>
-                <td>
-                    ""
-                </td>
-                <td>
-                    @item.PlaceOrEvent
-                </td>
-                <td>
-                    @item.date
-                </td>
+                    </div>
+                    <a href="#0" class="cd-close">Close</a>
+                </div>
+            </li>
 
-                <td>
-                    @item.notes
-                </td>
-                <td>
-                    @item.name
-                </td>
-                <td>
-                    @item.cellphone
-                </td>
-                <td>
-                    @item.email
-                </td>
-            </tr>
-            //<tr class="fold">accordion</tr>
+               
+            }
+        </ul>
+       
 
-        }
-    </table>
-</div>
+    </div>
+</body>
 
+</html>
