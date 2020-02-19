@@ -56,20 +56,24 @@
 
         });
             });
-   });
+    });
+
+       function showPhoneInput(){
+           debugger;
+           $("#cellphone").css("display", "block");
+        }
 </script>
-@*<img src="~/trial/image.png" id="background" alt="רקע לא נמצא" />*@
 <html>
 <body>
-    @*<img src="~/icons/432.jpg" id="background" alt="רקע לא נמצא" />*@
-    @*<p>
 
-        @Html.ActionLink("הוסף מציאה", "CreateFind", "Create")
-    </p>*@
-
+    <div>
+        <a title="HomePage" href="@Url.Action("Home","home")"><i class="fas fa-angle-left"></i></a>
+    </div>
     <div id="containerSearchForm" @*class="containerx"*@>
 
         <div id="wrapSearchForm">
+            <div class="container_title">חיפוש מציאה</div>
+            <img class="icon-search" src="~/icons/category.png" /><br />
             <form id="categoryForm" action="@Url.Action("Index", "Home")" style="display:inline-block">
                 <select id="category" name="category" class="input1">
                     <option>בחר קטגוריה</option>
@@ -88,11 +92,11 @@
             }))
             {
 
-                <img style="height:25px" src="~/trial/email.ico" />
+
 
 
                 <input id="hiddenMainCategory" name="hiddenCategory" hidden="hidden" value="הכל" />
-
+                <img class="icon-search" src="~/icons/subCategory.png" />
                 <select id="subCategories" name="subCategory" class="input1">
                     <option>בחר תת קטגוריה</option>
                     @if (Model != null)
@@ -104,7 +108,7 @@
 
                     }
                 </select>
-                <img style="height:25px" src="~/trial/email.ico" />
+                <img class="icon-search" src="~/icons/location.png" />
                 <select id="place" name="place" class="input1">
                     <option>בחר מקום</option>
                     @foreach (var item in ViewBag.place)
@@ -112,12 +116,15 @@
                         <option>@item.PlaceOrEvent</option>
                     }
                 </select>
-                <img style="height:25px" src="~/trial/email.ico" />
+
+                <img class="icon-search" src="~/icons/date.png" />
                 <input id="fromDate" type="date" name="fromDate" class="input1" />
                 <input id="dateNow" type="date" name="toDate" class="input1" />
-                <img style="height:25px" src="~/trial/email.ico" />
+
+                <img class="icon-search" src="~/icons/description.png" />
                 <input type="text" placeholder="טקסט חופשי" name="text" class="input1" />
-                <img style="height:25px" src="~/trial/email.ico" />
+
+                <img class="icon-search" src="~/Images/Icons/file.png" />
                 <div class="input1">
                     <label class="containerCheckbox">
                         חפש גם בארכיון
@@ -125,75 +132,89 @@
                         <span class="checkmark"></span>
                     </label>
                 </div>
-                @*<div class="row"><input type="checkbox" id="searchArchive" name="searchArchive" value="true" class=" col-md-4" /><label class="col-md-4">חיפוש בארכיון</label></div>*@
+                <img class="icon-search" src="~/Images/Icons/send.png" />
                 <input type="submit" class="input1" value="סנן" />
 
             }
         </div>
     </div>
     <div id="updateTable">
-        
         <ul class="cd-items cd-container card">
             @foreach (var item in ViewBag.tbl)
             {
 
-            <li class="cd-item">
+                <li class="cd-item">
 
-                <div class="cd-item-img-container">
-                    <img src="@Url.Content(@item.picture)" alt="Item Preview" />
-                </div>
-                <div style="background-color:ghostwhite">
-                    <h4 class="card-title">@item.description</h4>
-                    <div>@item.subcategoryname</div>
-                </div>
-                <a href="#0" class="cd-trigger">הצג פרטים</a>
-                
-        
-                <div class="cd-quick-view">
-                    <div class="cd-slider-wrapper">
-                        <ul class="cd-slider">
-                            <li class="selected">
-                                <img src="@Url.Content(@item.picture)" alt="Item Preview" />
-                            </li>
-                        </ul>
+                    <div class="cd-item-img-container">
+                        <img src="@Url.Content(@item.picture)" alt="Item Preview" />
                     </div>
-                    <div class="cd-item-info">
-                        <div class="info-data">
-                            <div>
+                    <div style="background-color:ghostwhite">
+                        <h4 class="card-title">@item.description</h4>
+                        @*<div class="card-title-sub">@item.subcategoryname</div>*@
+                    </div>
+                    <a href="#0" class="cd-trigger">הצג פרטים</a>
 
-                                <h3>@item.description</h3>
-                            </div>
-                            <div>
-                                <label>נמצא בתאריך:</label>
-                                <p>@item.date</p>
-                            </div>
-                            <div>
-                                <label>נמצא ב:</label>
-                                <p>@item.PlaceOrEvent</p>
-                            </div>
-                            <div>
-                                <label>הערות:</label>
-                                <p>@item.notes</p>
-                            </div>
-                            <div>
-                                <label>פרטי מוצא:</label>
-                                <p class="finder-info">@item.name</p>
-                                <p class="finder-info">@item.email</p>
-                                <p class="finder-info">@item.cellphone</p>
-                            </div>
+
+                    <div class="cd-quick-view">
+                        <div class="cd-slider-wrapper">
+                            <ul class="cd-slider">
+                                <li class="selected">
+                                    <img src="@Url.Content(@item.picture)" alt="Item Preview" />
+                                </li>
+                            </ul>
                         </div>
+                        <div class="cd-item-info">
+                            <div class="info-data">
+                                <div>
+                                    <h3>@item.description</h3>
+                                </div>
+                                <div>
+                                    <label>נמצא בתאריך:</label>
+                                    <p>@item.date</p>
+                                </div>
+                                <div>
+                                    <label>נמצא ב:</label>
+                                    <p>@item.PlaceOrEvent</p>
+                                </div>
+                                <div>
+                                    <label>הערות:</label>
+                                    <p>@item.notes</p>
+                                </div>
+                                <div>
+                                    <label>פרטי מוצא:</label>
+                                    <p class="finder-info">@item.name</p>
+                                    <p class="finder-info">@item.email</p>
+                                    <p class="finder-info">@item.cellphone</p>
+                                </div>
+                                <div>
+                                    <input type="button" onclick="showPhoneInput()" value="צור קשר עם המוצא" />
+                                </div>
+                                @using (Html.BeginForm("makeCall", "phoneCall", FormMethod.Post))
+                                {
+                                    <div id="cellphone">
+                                        <input type="text" maxlength="10" name="phone" />
+                                        <input type="text" name="findId" value="@item.id" style="display:none" />
+                                        <input type="submit" value="התקשר" />
+                                    </div>
+                                }
+                            </div>
 
+                        </div>
+                        <a href="#0" class="cd-close">Close</a>
                     </div>
-                    <a href="#0" class="cd-close">Close</a>
-                </div>
-            </li>
 
-               
+                </li>
+
+
             }
         </ul>
-       
+
 
     </div>
+    <div class="container_title" id="finds-container-title">לוח מציאות</div>
+
+
+
 </body>
 
 </html>

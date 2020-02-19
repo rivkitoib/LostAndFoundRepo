@@ -68,6 +68,7 @@ namespace LostAndFound.Controllers
         {
              
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
+            string dbFileName = "DB_" + filename;
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
             var imgBase64 = GetPropertyValue("imagedata");
             bool specifiedImgae = true;
@@ -124,12 +125,12 @@ namespace LostAndFound.Controllers
                 for (; x < width; x++)
                     for (int y1 = y; y1 < y + height; y1++)
                         imageToEdit.SetPixel(x, y1, color);
-                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], "DB_" + filename);
+                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], dbFileName);
                    imageToEdit.Save(fullPath,ImageFormat.Jpeg);   
                   
                               
             }
-            CreateFindInDB(fullPath);
+            CreateFindInDB(dbFileName);
             return RedirectToAction("Index", "Home");
         }
 
@@ -161,7 +162,7 @@ namespace LostAndFound.Controllers
             newFind.cellphone = GetPropertyValue("cellphone");
             newFind.description = GetPropertyValue("description");
             newFind.email = GetPropertyValue("email");
-            newFind.picture = pathToImage;
+            newFind.picture = Path.Combine("~\\Images\\ForDB", pathToImage);
             DB.finds.Add(newFind);
             try
             {
@@ -172,8 +173,8 @@ namespace LostAndFound.Controllers
                 Console.WriteLine(ex.InnerException);
                 throw;
             }
-            if (newFind.email != "")
-                SendMail.sendFinderFind(newFind);
+            //if (newFind.email != "")
+            //    SendMail.sendFinderFind(newFind);
 
 
         }

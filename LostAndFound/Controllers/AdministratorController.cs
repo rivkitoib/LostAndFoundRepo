@@ -1,10 +1,11 @@
 ﻿using LostAndFound.Models;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using LostAndFound.Crypto;
 
 namespace LostAndFound.Controllers
 {
@@ -89,6 +90,28 @@ namespace LostAndFound.Controllers
             {
                 Console.WriteLine("Error writing app settings");
             }
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string password)
+        {
+            string adminPassword = ConfigurationManager.AppSettings["adminPassword"];
+            string encryptedPassword = Hash256.GenerateSHA256String(password);
+            if (!encryptedPassword.Equals(adminPassword))
+            {
+               return View();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult addHeadCategory()
+        {
+            return PartialView("defineCategories");
         }
         public class SettingsObject
         {
