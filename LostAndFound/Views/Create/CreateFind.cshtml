@@ -68,7 +68,7 @@
         </div>
         <div class="container_input">
             <img class="input_icon" src="~/Images/Icons/description.png" title="תאור" />
-            <textarea class="input1" name="description" placeholder="תאור"></textarea>
+            <textarea class="input1" required name="description" placeholder="תאור"></textarea>
             @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
         </div>
         <div class="container_input">
@@ -88,13 +88,13 @@
             @Html.ValidationMessageFor(model => model.finderName, "", new { @class = "text-danger" })
         </div>
         <div class="container_input">
-            <img class="input_icon" required src="~/Images/Icons/phone.png" title="טלפון" />
-            <input class="input1" name="cellphone" placeholder="טלפון" />
+            <img class="input_icon"  src="~/Images/Icons/phone.png" title="טלפון" />
+            <input class="input1" required name="cellphone" placeholder="טלפון" />
             @Html.ValidationMessageFor(model => model.cellphone, "", new { @class = "text-danger" })
         </div>
         <div class="container_input">
             <img class="input_icon" src="~/Images/Icons/mail.png" title="דואר אלקטרוני" />
-            <input type="email" class="input1" name="email" placeholder="דואר אלקטרוני" />
+            <input type="email" required class="input1" name="email" placeholder="דואר אלקטרוני" />
             @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
         </div>
         <div class="input_icon"></div>
@@ -122,9 +122,8 @@
                     </div>
                     <canvas id='canvas' name="webCamPicture" class="imagePlace"></canvas>
                     <div id="control">
-                        <a id='retake'><i class="fas fa-sync-alt"></i></a>
-                        <a id='snap'><i class="fas fa-check"></i></a>
-
+                        <a id='retake' title="רענן"><i class="fas fa-sync-alt"></i></a>
+                        <a id='snap'  title="צלם"><i class="fas fa-camera-retro"></i></a>
                     </div>
                 </div>
                 <div id="dragableDiv">
@@ -137,11 +136,16 @@
 
     @*<img src="image.png" id="background" alt="רקע לא נמצא" />*@
 
-    <div id="container4" class="container_">
-        סימן- הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו
-        הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"
-    </div>
-    <button type="submit" id="saveFind" title="שמור מציאה"><i class="fas fa-angle-left"></i></button>
+<div id="container4" class="container_">
+    <div class="container_title">מקור</div>
+    <h2 class="text">סימן-</h2>
+     @*הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו
+    הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"*@
+<h3 class="text">הוא סימן היכר ייחודי, שיוכל להוכיח את תביעת הבעלים על אבידתו</h3>
+<h5 class="text">הרואה אבידת ישראל שיש בה סימן ומעלים עיניו ממנה, עובר בלא תעשה "לא תראה את שור.. והתעלמת" וכן מבטל מצוות עשה של "השב תשיבם"</h5>
+</div>
+    <button type="submit" id="saveFind" title="שמור מציאה">@*<i class="fas fa-angle-left"></i>*@
+                                                           <i class="fas fa-check"></i></button>
     @*<input type="submit" id="saveFind" class="ui-button" value="שמור מציאה" />*@
 </form>
 <div>
@@ -207,9 +211,7 @@
                 }
             }
         );
-
-
-        $("#dragableDiv").resizable({ handles: 'n,w,s,e' });
+       //$("#dragableDiv").resizable({ handles: 'n,w,s,e' });
 
 });
 </script>

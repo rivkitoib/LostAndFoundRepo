@@ -83,6 +83,9 @@
             data: formdata,
             success: function (data) {
                 alert('success')
+            },
+            error: function (data) {
+                alert('failed')
             }
         }).done(function (o) {
             console.log('saved');

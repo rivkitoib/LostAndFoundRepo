@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using LostAndFound.eMail;
 
 namespace LostAndFound.Controllers
 {
@@ -26,6 +27,8 @@ namespace LostAndFound.Controllers
         [HttpGet]
         public ActionResult CreateFind()
         {
+            //SendMail.send();
+
             ViewBag.headCategories = DB.headCategories.ToList();
             ViewBag.locations = DB.locations.ToList();
             ViewBag.sub = getSubCategories(1);
@@ -58,11 +61,12 @@ namespace LostAndFound.Controllers
         }
         int _headCategory = 1;
 
+   
 
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase importFile)
         {
-
+             
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             string dbFileName = "DB_" + filename;
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
@@ -70,17 +74,24 @@ namespace LostAndFound.Controllers
             bool specifiedImgae = true;
             if (importFile != null)
             {
-                using (Image img = Image.FromStream(importFile.InputStream))
+                Image img;
+                using (img = Image.FromStream(importFile.InputStream))
                 {
                     var sizes = GetPropertyValue("sizes").Split(';');
                     int h = int.Parse(sizes[0]);
                     int w = int.Parse(sizes[1]);
-                    using (Bitmap b = new Bitmap(img, new Size(w, h)))
+                    Bitmap b;
+                    using (b = new Bitmap(img, new Size(w, h)))
                     {
                         b.Save(fullPath);
                         importFile.InputStream.Close();
-                    }
+                       
+                    } 
+                    b = null;
+                    img.Dispose();
+                   
                 }
+                img = null;
             }
             else if (imgBase64 != "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCACWASwDAREAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJ/4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z")
             {

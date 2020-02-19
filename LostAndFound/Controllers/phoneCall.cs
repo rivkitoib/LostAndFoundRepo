@@ -28,7 +28,8 @@ namespace LostAndFound.Controllers
             try
             {
 
-                //Pass the messageId as URL parameter.
+                //Pass the messageId as URL parameter
+
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls
                                                 | SecurityProtocolType.Tls11
                                                 | SecurityProtocolType.Tls12

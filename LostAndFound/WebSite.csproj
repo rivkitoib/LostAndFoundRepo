@@ -63,14 +63,6 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Rest.ClientRuntime.2.3.18\lib\net452\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
@@ -84,15 +76,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\libemgucv-windesktop-4.2.0.3636\bin\netstandard.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.WebRequest" />
@@ -130,20 +117,30 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Twilio, Version=5.37.4.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Twilio">
       <HintPath>..\packages\Twilio.5.37.4\lib\net451\Twilio.dll</HintPath>
-      <Private>True</Private>
     </Reference>
-    <Reference Include="Twilio.AspNet.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Twilio.AspNet.Common.5.33.1\lib\net45\Twilio.AspNet.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Twilio.AspNet.Mvc, Version=5.33.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Twilio.AspNet.Mvc">
       <HintPath>..\packages\Twilio.AspNet.Mvc.5.33.1\lib\net451\Twilio.AspNet.Mvc.dll</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\EASendMail.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Microsoft.Azure.CognitiveServices.Search.ImageSearch.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Rest.ClientRuntime.Azure.dll" />
+    <Content Include="bin\Microsoft.Rest.ClientRuntime.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\netstandard.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -151,6 +148,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Controllers\drag.js" />
     <Content Include="eMail\devek.png" />
+    <Content Include="eMail\email.htm" />
     <Content Include="eMail\page.html" />
     <Content Include="eMail\WIN_20200108_12_55_39_Pro.jpg" />
     <Content Include="eMail\לוגו.JPG" />
@@ -182,17 +180,7 @@
     <Content Include="Images\Icons\send.png" />
     <Content Include="Images\Icons\subCategory.png" />
     <Content Include="Images\image2.png" />
-    <Content Include="icons\Background.png" />
-    <Content Include="icons\camera.png" />
-    <Content Include="icons\category.png" />
-    <Content Include="icons\date.png" />
-    <Content Include="icons\file.png" />
-    <Content Include="icons\Flowers.jpg" />
-    <Content Include="icons\location.png" />
-    <Content Include="icons\name.png" />
-    <Content Include="icons\notes.png" />
-    <Content Include="icons\send.png" />
-    <Content Include="icons\subCategory.png" />
+    <Content Include="obj\Debug\LostAndFound.csproj.FileListAbsolute.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />
@@ -244,94 +232,55 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="icons\432.jpg" />
-    <Content Include="icons\tempLogo.JPG" />
-    <Content Include="Scripts\css\.DS_Store" />
-    <Content Include="Scripts\css\bootstrap-grid.css.map" />
-    <Content Include="Scripts\css\bootstrap-grid.min.css.map" />
-    <Content Include="Scripts\css\bootstrap-reboot.css.map" />
-    <Content Include="Scripts\css\bootstrap-reboot.min.css.map" />
-    <Content Include="Scripts\css\bootstrap.css.map" />
-    <Content Include="Scripts\css\bootstrap.min.css.map" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\bootstrap-combined.min.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\css\bootstrap-grid.css" />
-    <Content Include="Scripts\css\bootstrap-grid.min.css" />
-    <Content Include="Scripts\css\bootstrap-reboot.css" />
-    <Content Include="Scripts\css\bootstrap-reboot.min.css" />
-    <Content Include="Scripts\css\bootstrap.css" />
-    <Content Include="Scripts\css\bootstrap.min.css" />
-    <Content Include="Scripts\font-awesome.css" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\LostAndFound.csprojAssemblyReference.cache" />
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\Jquery.js" />
-    <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery-ui.min.css" />
     <Content Include="Scripts\jquery-ui.min.js" />
-    <Content Include="Scripts\Jquery.js" />
-    <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
-    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\product-quick-view-master\.gitignore" />
-    <Content Include="Scripts\product-quick-view-master\css\css.css" />
-    <Content Include="Scripts\product-quick-view-master\css\reset.css" />
-    <Content Include="Scripts\product-quick-view-master\css\style.css" />
-    <Content Include="Scripts\product-quick-view-master\img\item-1.jpg" />
-    <Content Include="Scripts\product-quick-view-master\img\item-2.jpg" />
-    <Content Include="Scripts\product-quick-view-master\img\item-3.jpg" />
-    <Content Include="Scripts\product-quick-view-master\index.html" />
-    <Content Include="Scripts\product-quick-view-master\js\jquery-2.1.1.js" />
-    <Content Include="Scripts\product-quick-view-master\js\main.js" />
-    <Content Include="Scripts\product-quick-view-master\js\modernizr.js" />
-    <Content Include="Scripts\product-quick-view-master\js\velocity.min.js" />
-    <Content Include="Scripts\searchPage.js" />
-    <Content Include="trial\email.ico" />
-    <Content Include="trial\image.png" />
-    <Content Include="trial\page.html" />
-    <Content Include="trial\style.css" />
+    <Content Include="Scripts\Self\camera.js" />
+    <Content Include="Scripts\Self\CreateFind.js" />
+    <Content Include="Styles\CreateFind.css" />
     <Content Include="Styles\imported\font-awesome.css" />
     <Content Include="Styles\imported\jquery-3.4.1.min.js" />
     <Content Include="Styles\imported\jquery-ui.min.css" />
     <Content Include="Styles\main.css" />
     <Content Include="Styles\Self\CreateFind.css" />
     <Content Include="Styles\util.css" />
+    <Content Include="Views\jquery-1.9.1.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\addFindController.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\phoneCall.cs" />
-    <Compile Include="Controllers\SendMail.cs" />
+    <Compile Include="eMail\SendMail.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001302358113_InitialCreate.cs" />
+    <Compile Include="Migrations\202001302358113_InitialCreate.Designer.cs">
+      <DependentUpon>202001302358113_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\migrationTrial.cs" />
     <Compile Include="Models\Archive.cs" />
     <Compile Include="Models\DbHandle.cs" />
     <Compile Include="Models\Find.cs" />
@@ -347,18 +296,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\CreateFind.cshtml" />
-    <Content Include="Views\Home\SearchFinds.cshtml" />
-    <Content Include="Views\Home\defineCategories.cshtml" />
-    <Content Include="Views\Administrator\Administrator.cshtml" />
-    <Content Include="Views\Administrator\headCategoryRecord.cshtml" />
-    <Content Include="Views\Home\AdministratorSettings.cshtml" />
-    <Content Include="Scripts\product-quick-view-master\js\velocity-LICENSE.md" />
-    <Content Include="Scripts\product-quick-view-master\partials\_layout.scss" />
-    <Content Include="Scripts\product-quick-view-master\partials\_mixins.scss" />
-    <Content Include="Scripts\product-quick-view-master\partials\_variables.scss" />
-    <Content Include="Scripts\product-quick-view-master\README.md" />
-    <Content Include="Scripts\product-quick-view-master\scss\style.scss" />
     <Content Include="Views\Create\CreateFind.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
@@ -366,6 +303,9 @@
     <Content Include="Views\Create\CreateFind2.cshtml" />
     <Content Include="Views\Create\estie.cshtml" />
     <Content Include="Views\Home\home.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Home\SearchFinds.cshtml" />
+    <Content Include="Views\Administrator\Settings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -375,9 +315,31 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\de\" />
+    <Folder Include="bin\es\" />
+    <Folder Include="bin\fr\" />
+    <Folder Include="bin\hu\" />
+    <Folder Include="bin\it\" />
+    <Folder Include="bin\ja\" />
+    <Folder Include="bin\pt\" />
+    <Folder Include="bin\roslyn\" />
+    <Folder Include="bin\ru\" />
+    <Folder Include="bin\sk\" />
+    <Folder Include="bin\sv\" />
+    <Folder Include="bin\tr\" />
+    <Folder Include="bin\x64\" />
+    <Folder Include="bin\x86\" />
+    <Folder Include="bin\zh-cn\" />
+    <Folder Include="bin\zh-tw\" />
     <Folder Include="Images\ForDB\" />
     <Folder Include="Images\Original\" />
-    <Folder Include="Views\addFind\" />
+    <Folder Include="obj\Debug\TempPE\" />
+    <Folder Include="obj\Release\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202001302358113_InitialCreate.resx">
+      <DependentUpon>202001302358113_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
