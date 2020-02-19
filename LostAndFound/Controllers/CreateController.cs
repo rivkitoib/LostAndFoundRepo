@@ -28,7 +28,6 @@ namespace LostAndFound.Controllers
         public ActionResult CreateFind()
         {
             //SendMail.send();
-            ConfigurationManager.AppSettings.GetKey("1") = "rrrrrrrr";
 
             ViewBag.headCategories = DB.headCategories.ToList();
             ViewBag.locations = DB.locations.ToList();
@@ -62,28 +61,7 @@ namespace LostAndFound.Controllers
         }
         int _headCategory = 1;
 
-        public static void AddOrUpdateAppSettings(string key, string value)
-        {
-            try
-            {
-                var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                var settings = configFile.AppSettings.Settings;
-                if (settings[key] == null)
-                {
-                    settings.Add(key, value);
-                }
-                else
-                {
-                    settings[key].Value = value;
-                }
-                configFile.Save(ConfigurationSaveMode.Modified);
-                ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-            }
-            catch (ConfigurationErrorsException)
-            {
-                Console.WriteLine("Error writing app settings");
-            }
-        }
+   
 
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase importFile)
@@ -155,77 +133,6 @@ namespace LostAndFound.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
-        [HttpPost]
-        public ActionResult CreateFind2()
-        {
-            var filename = $"{Guid.NewGuid().ToString()}.jpg";
-            var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
-            var imgBase64 = GetPropertyValue("imagedata");
-            bool specifiedImgae = true;
-           
-           if (imgBase64 != "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCACWASwDAREAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJ/4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z")
-            {
-                if (!string.IsNullOrEmpty(imgBase64))
-                {
-                    var imageData = imgBase64.Split(',')[1];
-                    var bytes = Convert.FromBase64String(imageData);
-                    Image image;
-                    using (MemoryStream ms = new MemoryStream(bytes))
-                    {
-                        image = Image.FromStream(ms);
-                    }
-                    image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                    image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-
-                }
-            }
-            else
-            {
-                fullPath = ConfigurationManager.AppSettings["DefaultFindPicture"];
-                specifiedImgae = false;
-            }
-            if (specifiedImgae)
-            {
-                var imageToEdit = new Bitmap(fullPath);
-
-                var info = GetPropertyValue("coverInfo").Split(';');
-
-                int x = int.Parse(info[2]), width = int.Parse(info[1]), y = int.Parse(info[3]), height = int.Parse(info[0]);
-                Color color = Color.LightGray;
-                for (; x < width; x++)
-                    for (int y1 = y; y1 < y + height; y1++)
-                        imageToEdit.SetPixel(x, y1, color);
-                fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], "DB_" + filename);
-                imageToEdit.Save(fullPath, ImageFormat.Jpeg);
-
-
-            }
-            CreateFindInDB(fullPath);
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpPost]
-        public ActionResult CreateFind(HttpPostedFileBase importFile)
-        {
-            var filename = $"{Guid.NewGuid().ToString()}.jpg";
-            var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
-            var imgBase64 = Request.Form.GetValues("imagedata").FirstOrDefault();
-            if (!string.IsNullOrEmpty(imgBase64))
-            {
-                var imageData = imgBase64.Split(',')[1];
-                var bytes = Convert.FromBase64String(imageData);
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-                    image = Image.FromStream(ms);
-                }
-                image.RotateFlip(RotateFlipType.RotateNoneFlipX);
-                image.Save(fullPath, System.Drawing.Imaging.ImageFormat.Jpeg);
-            }
-            CreateFindInDB(fullPath);
-            return View();
-        }
         private string GetPropertyValue(string propName, string defval = "")
         {
             var v = Request.Form.GetValues(propName).FirstOrDefault() ?? defval;
