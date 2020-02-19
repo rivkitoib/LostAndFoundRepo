@@ -1,225 +1,241 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Settings";
 }
-    <!--<script src="jquery-1.9.1.min.js"></script>-->
+<style>
+    body {
+        background-image: url(img.jpg);
+    }
+
+    #categories, #places, #details {
+        font-family: Tahoma;
+        font-size: medium;
+        margin: 5%;
+        border: solid 1px purple;
+        width: 20%;
+        padding: 1%;
+        color: purple;
+        background-color: white;
+    }
+
+    #details {
+        float: right;
+        padding-right: 3%;
+    }
+
+    input {
+        color: purple;
+        font-size: medium;
+        font-family: Tahoma;
+        margin-bottom: 6%;
+    }
+
+    #categories {
+        float: right;
+        margin-right: 8%;
+    }
+
+    #places {
+        float: left;
+        margin-left: 8%;
+    }
+
+    label {
+        margin-top: 3%;
+    }
+
+    h3 {
+        color: purple;
+        font-size: 25px;
+        text-align: center;
+    }
+
+    button {
+        color: white;
+        background-color: purple;
+        width: 15em;
+        text-align: center;
+        padding: 1%;
+        font-size: large;
+        font-family: Tahoma;
+        font-weight: bold;
+        border: aliceblue;
+        cursor: pointer;
+        margin-top: 40%;
+        position: absolute;
+    }
+
+    submit {
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: #650765;
+    }
+</style>
 <script type="text/javascript">
-    $(document).ready(function () {
-    });
+    var i = 0;
+    var collection = [[]];
+    function addCategory(catId) {
+        var lastCategory = document.getElementsByClassName("category")[
+            document.getElementsByClassName("category").length - 1];
+        if (lastCategory.textContent != "הכנס קטגוריההכנס תת קטגוריה") {
+            lastCategory.removeAttribute("onmouseout");
+            var li = document.createElement('li');
+            li.classList = "category";
+            li.id = "cat" + catId;
+            li.setAttribute("onmouseout", "addCategory(" + (catId + 1) + ")");
+            li.setAttribute("contenteditable", "true");
+            li.innerHTML = "הכנס קטגוריה";
+            var ul = document.createElement('ul');
+            ul.id = catId + "catList";
+            var subLi = document.createElement('li');
+            subLi.setAttribute("onmouseout", "addSub(" + catId + ")");
+            subLi.classList = "sub" + catId;
+            subLi.setAttribute("contenteditable", "true");
+            subLi.innerHTML = "הכנס תת קטגוריה";
+            ul.appendChild(subLi);
+            li.appendChild(ul);
+            document.getElementById("catList").appendChild(li);
+        }
+    }
+    function addSub(i) {
+        var lastSub = document.getElementsByClassName("sub" + i)[
+            document.getElementsByClassName("sub" + i).length - 1];
+        if (lastSub.innerText != "הכנס תת קטגוריה") {
+            lastSub.removeAttribute("onmouseout");
+            var li = document.createElement('li');
+            li.classList = "sub" + i;
+            li.setAttribute("onmouseout", "addSub(" + i + ")");
+            li.setAttribute("contenteditable", "true");
+            li.innerHTML = "הכנס תת קטגוריה";
+            document.getElementById(i + "catList").appendChild(li);
+        }
+    }
+    function addPlace() {
+        var lastPlace = document.getElementsByClassName("place")[
+            document.getElementsByClassName("place").length - 1];
+        if (lastPlace.innerText != "הכנס מיקום") {
+            lastPlace.removeAttribute("onmouseout");
+            var li = document.createElement('li');
+            li.setAttribute("onmouseout", "addPlace()");
+            li.innerHTML = "הכנס מיקום";
+            li.classList = "place";
+            li.setAttribute("contenteditable", "true");
+            document.getElementById("placeList").appendChild(li);
+        }
+    }
+    function saveCategories() {
+        var categories = document.getElementsByClassName("category");
+
+        for (i = 0; i < categories.length; i++) {
+            collection[i] = categories[i].innerText.split("\n");
+            collection[i] = collection[i].filter(IsInsertedSub);
+        }
+        collection = collection.filter(IsInserted);
+        var categoryString = "";
+        for (i = 0; i < categories.length; i++) {
+            categoryString = categoryString + categories[i].join("+") + "&";
+        }
+        document.getElementsByName("categoriesStream").innerText = categoryString;
+    }
+    function saveCategories2() {
+        var categories = document.getElementsByClassName("category");
+        var newCat = [[]];
+        for (i = 0; i < categories.length; i++) {
+
+            collection[i] = categories[i].innerText.split("\n");
+
+        }
+        collection = collection.filter(IsInserted);
+        var categoryString = "";
+        for (i = 0; i < categories.length; i++) {
+            categoryString = categoryString + categories[i].join("+") + "&";
+        }
+        document.getElementsByName("categoriesStream").innerText = categoryString;
+    }
+    function saveLocations() {
+        var locations = document.getElementsByClassName("placeList").innerText.split("\n");
+        location = location.filter(IsInsertedSub);
+        location = location.join("+");
+        document.getElementsByName("locationsStream").innerText = location;
+    }
+    function SaveValues() {
+        saveCategories();
+        saveLocations();
+        document.getElementsByTagName('form')[0].submit();
+    }
+    function IsInserted(categoryArr) {
+        if (categoryArr == "")
+            return false;
+        return !(categoryArr[0].includes("הכנס") || categoryArr[0].length < 1);
+    }
+    function IsInsertedSub(subCategory) {
+
+        return !(subCategory.includes("הכנס") || subCategory.length < 1);
+    }
 
 </script>
-    <style>
-        body {
-            background-image: url(img.jpg);
-        }
+<i id="homeIcon" class="fas fa-home" onclick="location.href='@Url.Action("home","Home")'"></i>
+<form action="@Url.Action(" SaveSettings", "Administrator" )">
+    <div id="categories" dir="rtl">
+        <h3>הוספת קטגוריות</h3>
+        <ul id="catList" style="list-style-type:square">
+            <li onmouseout="addCategory(2)" class="category" id="cat1" contenteditable="true">
+                הכנס קטגוריה
+                <ul id="1catList">
+                    <li onmouseout="addSub(1)" class="sub1" contenteditable="true">
+                        הכנס תת קטגוריה
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="places" dir="rtl">
+        <h3>הוספת מיקומים</h3>
 
-        #categories, #places, #details {
-            font-family: Tahoma;
-            font-size: medium;
-            margin: 5%;
-            border: solid 1px purple;
-            width: 20%;
-            padding: 1%;
-            color: purple;
-            background-color: white;
-        }
+        <ul id="placeList" style="list-style-type:square">
+            <li onmouseout="addPlace()" class="place" contenteditable="true">
+                הכנס מיקום
+        </ul>
+    </div>
+    <input type="text" name="categoriesStream" hidden="hidden" />
+    <input type="text" name="locationsStream" hidden="hidden" />
+    <div id="details" dir="rtl">
+        <h3>עריכת פרטים אישיים</h3>  <i class="fal fa-mailbox"></i>
+        <label>כתובת מייל</label>
 
-        #details {
-            float: right;
-            padding-right: 3%;
-        }
+        <br />
+        <input name="email" type="email" value='@ViewBag.email' />
+        <br />
 
-        input {
-            color: purple;
-            font-size: medium;
-            font-family: Tahoma;
-            margin-bottom: 6%;
-        }
+        <i class="fas fa-unlock-alt"></i>
+        <label>סיסמא של המייל </label>
+        <br />
+        <input name="emailPass" value='@ViewBag.emailPass' />
+        @*<label>סיסמת מנהל</label>
+        <br />
+        <input name="text" type="number" />
+        *@
 
-        #categories {
-            float: right;
-            margin-right: 8%;
-        }
+        <br />
+        <!--<label>תדירות זמן</label>
+        <br />
+        <input  type="number" />-->
+        <br />
+        <div onclick="location.href='@Url.Action(" Archive","Administrator")'">
+            <i class="fas fa-download" title="מעביר פריטים הנמצאים למעלה מחודש">
 
-        #places {
-            float: left;
-            margin-left: 8%;
-        }
 
-        label {
-            margin-top: 3%;
-        }
-
-        h3 {
-            color: purple;
-            font-size: 25px;
-            text-align: center;
-        }
-
-        button {
-            color: white;
-            background-color: purple;
-            width: 15em;
-            text-align: center;
-            padding: 1%;
-            font-size: large;
-            font-family: Tahoma;
-            font-weight: bold;
-            border: aliceblue;
-            cursor: pointer;
-            margin-top: 40%;
-            position: absolute;
-        }
-
-        submit {
-            text-align: center;
-        }
-
-        button:hover {
-            background-color: #650765;
-        }
-    </style>
-    <script type="text/javascript">
-        var i = 0;
-         var collection = [[]];
-        function addCategory(catId) {
-            var lastCategory = document.getElementsByClassName("category")[
-                document.getElementsByClassName("category").length - 1];
-            if (lastCategory.textContent != "הכנס קטגוריההכנס תת קטגוריה") {
-                lastCategory.removeAttribute("onmouseout");
-                var li = document.createElement('li');
-                li.classList = "category";
-                li.id = "cat" + catId;
-                li.setAttribute("onmouseout", "addCategory(" + (catId + 1) + ")");
-                li.setAttribute("contenteditable", "true");
-                li.innerHTML = "הכנס קטגוריה";
-                var ul = document.createElement('ul');
-                ul.id = catId + "catList";
-                var subLi = document.createElement('li');
-                subLi.setAttribute("onmouseout", "addSub(" + catId + ")");
-                subLi.classList = "sub" + catId;
-                subLi.setAttribute("contenteditable", "true");
-                subLi.innerHTML = "הכנס תת קטגוריה";
-                ul.appendChild(subLi);
-                li.appendChild(ul);
-                document.getElementById("catList").appendChild(li);
-            }
-        }
-        function addSub(i) {
-            var lastSub = document.getElementsByClassName("sub" + i)[
-                document.getElementsByClassName("sub" + i).length - 1];
-            if (lastSub.innerText != "הכנס תת קטגוריה") {
-                lastSub.removeAttribute("onmouseout");
-                var li = document.createElement('li');
-                li.classList = "sub" + i;
-                li.setAttribute("onmouseout", "addSub(" + i + ")");
-                li.setAttribute("contenteditable", "true");
-                li.innerHTML = "הכנס תת קטגוריה";
-                document.getElementById(i + "catList").appendChild(li);
-            }
-        }
-        function addPlace() {
-            var lastPlace = document.getElementsByClassName("place")[
-                document.getElementsByClassName("place").length - 1];
-            if (lastPlace.innerText != "הכנס מיקום") {
-                lastPlace.removeAttribute("onmouseout");
-                var li = document.createElement('li');
-                li.setAttribute("onmouseout", "addPlace()");
-                li.innerHTML = "הכנס מיקום";
-                li.classList = "place";
-                li.setAttribute("contenteditable", "true");
-                document.getElementById("placeList").appendChild(li);
-            }
-        }
-        function saveCategories() {
-            var categories = document.getElementsByClassName("category");
-
-            for (i = 0; i < categories.length; i++)
-            {
-                collection[i] = categories[i].innerText.split("\n");
-                collection[i]=  collection[i].filter(IsInsertedSub);
-            }
-            collection = collection.filter(IsInserted);
-            var categoryString="";
-            for (i = 0; i < categories.length; i++) {
-                categoryString= categoryString+collection[i].join("+") + "&";
-            }
-            document.getElementsByName("categoriesStream").value = categoryString;
-        }
-         function saveLocations() {
-             var locations = document.getElementsByClassName("placeList").innerText.split("\n");
-             location = location.filter(IsInsertedSub);
-             location = location.join("+");
-               document.getElementsByName("locationsStream").value = location;
-        }
-        function SaveValues() {
-            saveCategories();
-            saveLocations();
-            document.getElementsByTagName('form')[0].submit();
-                  }
-        function IsInserted(categoryArr) {
-            if (categoryArr == "")
-                return false;
-            return !(categoryArr[0].includes("הכנס") || categoryArr[0].length < 1);
-        }
-        function IsInsertedSub(subCategory) {
-
-                    return !(subCategory.includes("הכנס")|| subCategory.length < 1);
-         }
-
-    </script>
-
-    <form action="@Url.Action("SaveSettings", "Administrator")">
-        <div id="categories" dir="rtl">
-            <h3>הוספת קטגוריות</h3>
-            <ul id="catList" style="list-style-type:square">
-                <li onmouseout="addCategory(2)" class="category" id="cat1" contenteditable="true">
-                    הכנס קטגוריה
-                    <ul id="1catList">
-                        <li onmouseout="addSub(1)" class="sub1" contenteditable="true">
-                            הכנס תת קטגוריה
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+            </i>    <label>העבר לארכיון</label>
+            <br />
         </div>
-        <div id="places" dir="rtl">
-            <h3>הוספת מיקומים</h3>
-        
-            <ul id="placeList"  style="list-style-type:square">
-                <li onmouseout="addPlace()" class="place" contenteditable="true">
-                    הכנס מיקום
-            </ul>
-        </div>
-        <input type="text" name="categoriesStream" hidden="hidden" />
-        <input type="text" name="locationsStream" hidden="hidden" />
-        <div id="details" dir="rtl">
-            <h3>עריכת פרטים אישיים</h3>
-            <label>כתובת מייל</label>
-            <br />
-            <input name="email" type="email" />
-            <br />
-            <label>סיסמא של המייל</label>
-            <br />
-            <input name="emailPass" type="number" />
-            <label>סיסמת מנהל</label>
-            <br />
-            <input name="password" type="number" />
-            <br />
-            <!--<label>תדירות זמן</label>
-    <br />
-    <input  type="number" />-->
-            <br />
-            <label>העברה לארכיון לאחר</label>
-            <br />
-            <input name="archive" type="number" />
-        </div>
-        <!--<div id="submit">
-            <button title="עדכון הפרטים במערכת">עדכן</button>
-        </div>-->
-        <button onclick="SaveValues()" value="שמור שינויים">שמור</button>
+    </div>
+    <!--<div id="submit">
+        <button title="עדכון הפרטים במערכת">עדכן</button>
+    </div>-->
+    <button onclick="SaveValues()" value="שמור שינויים">שמור</button>
 
-    </form>
+</form>
 
 
 

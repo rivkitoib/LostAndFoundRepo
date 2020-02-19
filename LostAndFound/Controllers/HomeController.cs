@@ -29,7 +29,7 @@ namespace LostAndFound.Controllers
 
                          select new View()
                          {
-                             picture=f.picture,
+                             picture = f.picture,
                              id = f.id,
                              idSubCategory = f.subCategory.id,
                              name = f.finderName,
@@ -66,10 +66,10 @@ namespace LostAndFound.Controllers
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase findFile)
         {
-            return View();                
+            return View();
         }
         [HttpGet]
-        public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory,bool searchArchive = false)
+        public ActionResult SearchFinds(string subCategory, string place, DateTime fromDate, DateTime toDate, string text, string hiddenCategory, bool searchArchive = false)
         {
             var findsFilterQuery = DB.finds.ToList().Select(x => x);
 
@@ -85,7 +85,7 @@ namespace LostAndFound.Controllers
                 findsFilterQuery = findsFilterQuery.Where(x => x.location.PlaceOrEvent.Equals(place));
             }
             //sorting by category or subCategory
-            if (hiddenCategory != null && hiddenCategory != "הכל"&& hiddenCategory != "בחר קטגוריה" )
+            if (hiddenCategory != null && hiddenCategory != "הכל" && hiddenCategory != "בחר קטגוריה")
             {
                 if (subCategory != "הכל" && subCategory != "בחר תת קטגוריה")
                 {
@@ -109,7 +109,7 @@ namespace LostAndFound.Controllers
 
             var filteredFinds = findsFilterQuery.Select(f => new View()
             {
-                picture=f.picture,
+                picture = f.picture,
                 id = f.id,
                 idSubCategory = f.subCategory.id,
                 name = f.finderName,
@@ -123,7 +123,7 @@ namespace LostAndFound.Controllers
                 categoryName = f.subCategory.headCategory.Name,
                 PlaceOrEvent = f.location.PlaceOrEvent
             });
-            
+
             ViewBag.tbl = filteredFinds.ToList();
 
             return PartialView();
@@ -131,7 +131,7 @@ namespace LostAndFound.Controllers
 
         public ActionResult home()
         {
-             return View();
+            return View();
         }
 
 

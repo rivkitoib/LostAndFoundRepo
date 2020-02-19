@@ -3,9 +3,15 @@
 }
 
     <style>
-        body{
-color:purple;  font-family:Tahoma; 
+        body {
+            color: purple;
+            font-family: Tahoma;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-image: url('../../Images/Background.png');
         }
+
         .card-container {
             cursor: pointer;
             height: 40em;
@@ -22,6 +28,7 @@ color:purple;  font-family:Tahoma;
             transform-style: preserve-3d;
             transition: all 1s ease-in-out;
             width: 100%;
+            background: #ffffff;
         }
 
             .card:hover {
@@ -38,20 +45,19 @@ color:purple;  font-family:Tahoma;
             }
 
             .card .back {
-                background: #ffffff;
                 color: purple;
                 line-height: 150px;
                 text-align: center;
                 transform: rotateY(180deg);
-                height: 106%;
-                border: solid purple;
+                height: 100%;
+                /*border: solid purple;*/
             }
 
         .logo {
-            position: absolute;
+            /*position: absolute;*/
             bottom: 0;
-            left: 5em;
-            width: 15em;
+            left: 28em;
+            width: 20em;
         }
 
         .imgs {
@@ -69,31 +75,62 @@ color:purple;  font-family:Tahoma;
         #page3 {
             left: -17%;
         }
+
+        .frontIcon:before {
+            font-size: 15em;
+            margin: 0.35em;
+            margin-top: 1em;
+            top: 3em;
+            color: purple;
+        }
+
+        .front {
+            z-index: 10;
+            /* margin: auto; */
+            width: 76%;
+            margin-right: 13%;
+        }
+
+        .backIcon:before {
+            color: #98feff;
+            font-size: 4em;
+        }
+        .block {
+            margin-top: 34%;
+        }
+        #addFindIcon:before {
+            margin: 0.2em;
+        }
     </style>
     <div id="page1" class="card-container">
        
         <div class="card">
             <div class="side">
-                <img src="~/Images/search.png" class="imgs" />
+                <div class="block"></div>
+                <i class="fas fa-search frontIcon"></i>
+                <img src="~/Images/לוגו.JPG" class="logo front" />
             </div>
-            <div class="side back">
-
+            <div class="side back" onclick="location.href='@Url.Action("Index","Home")'">
+                <i class="fas fa-search backIcon"></i>
                 <h2>חיפוש</h2>
-                @Html.ActionLink("<-", "Index", "Home")
+
                 <h4>בדף זה תוכל לצפות במציאות הקימות, באפשרותך לסנן לפי פרמטרים מועדפים ובמידת הצורך ליצור קשר עם המפרסם</h4>
                 <img src="~/Images/לוגו.JPG" class="logo" />
-           
+
             </div>
         </div>
     </div>
+  
     <div id="page2" class="card-container">
         <div class="card">
             <div class="side">
-                <img src="~/Images/addFind.png" class="imgs" />
+                <div class="block"></div>
+                <i id="addFindIcon" class="far fa-edit frontIcon"></i>
+                <img src="~/Images/לוגו.JPG" class="logo front" />
             </div>
-            <div class="side back">
+            <div class="side back" onclick="location.href='@Url.Action("CreateFind","Create")'">
+                <i class="far fa-edit backIcon"></i>
                 <h2>הוסף מציאה</h2>
-                @Html.ActionLink("<-", "CreateFind", "Create")
                 <h4>כאן תוסיף את פרטי המציאה שמצאת</h4>
                 <img src="~/Images/לוגו.JPG" class="logo" />
             </div>
@@ -102,11 +139,13 @@ color:purple;  font-family:Tahoma;
     <div id="page3" class="card-container">
         <div class="card">
             <div class="side">
-                <img src="~/Images/Setting.png" class="imgs" />
+                <div class="block"></div>
+                <i class="fas fa-tools frontIcon"></i>
+                <img src="~/Images/לוגו.JPG" class="logo front" />
             </div>
-            <div class="side back">
+            <div class="side back" onclick="location.href='@Url.Action("Settings","Administrator")'">
+                <i class="fas fa-tools backIcon"></i>
                 <h2>הגדרות מערכת</h2>
-                @Html.ActionLink("<-", "Settings", "Administrator")
                 <h4>ניהול המערכת, הגדרות ונתונים. לתשומת לב: דף זה זמין למשתמשים מורשים בלבד</h4>
                 <img src="~/Images/לוגו.JPG" class="logo" />
             </div>

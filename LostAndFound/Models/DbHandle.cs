@@ -1,27 +1,16 @@
 ﻿namespace LostAndFound.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.ModelConfiguration.Conventions;
-    using System.Collections;
-    using System.Data.Common;
-    using System.Data;
-    using System.IO;
-    using System.Data.SqlClient;
 
     public partial class DbHandle : DbContext
     {
 
 
-        public DbHandle():base("VeHashevotaEntities")
+        public DbHandle() : base("VeHashevotaEntities")
         {
 
         }
-        
+
 
 
 

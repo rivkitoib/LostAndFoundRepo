@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace LostAndFound.Models
+﻿namespace LostAndFound.Models
 {
     public class Settings
     {
 
         //TODO add email
-       public string password;
-      public  int freqInDays;
+        public string password;
+        public int freqInDays;
     }
 }

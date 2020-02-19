@@ -1,11 +1,9 @@
-﻿using LostAndFound.Models;
+﻿using LostAndFound.Crypto;
+using LostAndFound.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Configuration;
-using LostAndFound.Crypto;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace LostAndFound.Controllers
 {
@@ -18,55 +16,98 @@ namespace LostAndFound.Controllers
         public ActionResult Settings()
         {
 
-            ViewBag.HeadCategories = DB.headCategories.ToList();
-            ViewBag.SubCategories = DB.subCategories.ToList();
-            ViewBag.Locations = DB.locations.ToList();
+            // ViewBag.HeadCategories = DB.headCategories.ToList();
+            // ViewBag.SubCategories = DB.subCategories.ToList();
+            // ViewBag.Locations = DB.locations.ToList();
             ViewBag.email = ConfigurationManager.AppSettings["Email"];
             ViewBag.emailPass = ConfigurationManager.AppSettings["EmailPassword"];
-            ViewBag.password = ConfigurationManager.AppSettings["adminPassword"];
+            // ViewBag.password = ConfigurationManager.AppSettings["adminPassword"];
 
-       
+
             //DB.locations
             return View();
         }
 
-        public ActionResult SaveSettings(string categoriesStream,string locationStream,string email,string emailPass,string password)
+        public ActionResult SaveSettings(string categoriesStream, string locationStream, string email, string emailPass, string password)
         {
-            SettingsObject settings= new SettingsObject();
+            
             HeadCategory headCategory;
-            String[] categories = settings.categoriesStream.Split('&');
-            foreach (string category in categories)
+            if (categoriesStream != null)
             {
-                String[] subCategories = category.Split('+');
-                headCategory = new HeadCategory();
-                headCategory.Name = subCategories[0];
-
-                SubCategory subCategory;
-                foreach(string subName in subCategories)
+                String[] categories = categoriesStream.Split('&');
+                foreach (string category in categories)
                 {
+                    String[] subCategories = category.Split('+');
+                    headCategory = new HeadCategory();
+                    headCategory.Name = subCategories[0];
+                    DB.headCategories.Add(headCategory);
+                    DB.SaveChanges();
+                    SubCategory subCategory;
+                    foreach (string subName in subCategories)
+                    {
+                        subCategory = new SubCategory();
+                        subCategory.name = subName;
+                        subCategory.headCategory = headCategory;
+                        DB.subCategories.Add(subCategory);
+                    }
                     subCategory = new SubCategory();
-                    subCategory.name = subName;
+                    subCategory.name = "אחר";
                     subCategory.headCategory = headCategory;
+
+
                 }
-                subCategory = new SubCategory();
-                subCategory.name = "אחר";
-                subCategory.headCategory = headCategory;
-
-
             }
-            String[] locations = settings.locationStream.Split('+');
+                if (locationStream != null) { 
+            String[] locations = locationStream.Split('+');
             Location location;
-            foreach(string loc in locations)
+            foreach (string loc in locations)
             {
                 location = new Location();
                 location.PlaceOrEvent = loc;
+                DB.locations.Add(location);
             }
-            AddOrUpdateAppSettings("Email", settings.email);
-            AddOrUpdateAppSettings("adminPassword", settings.password);
-            //encrypt
-            AddOrUpdateAppSettings("EmailPassword", settings.emailPass);
-            
-            return  RedirectToAction("Index","Home");
+            DB.SaveChanges();
+            }
+            AddOrUpdateAppSettings("Email", email);
+          AddOrUpdateAppSettings("EmailPassword", emailPass);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Archive()
+        {
+            Object archive2 = new object();
+            var sendsToArchive = DB.finds.Where(find => DateTime.Compare(find.dateFound, DateTime.Now) < 10).ToList();
+
+            foreach (Find find in sendsToArchive)
+            {
+                sendToArchive(find, false);
+            }
+            RedirectResult r = new RedirectResult("/Administrator/Settings");
+            return r;
+        }
+
+        public void sendToArchive(Find find, Boolean isReturned)
+        {
+            Archive archive = new Archive();
+            archive.description = find.description;
+            archive.notes = find.notes;
+            archive.location = find.location;
+            archive.picture = archive.picture;
+            archive.subCategory = find.subCategory;
+            archive.finderName = find.finderName;
+            archive.email = find.email;
+            archive.cellphone = find.cellphone;
+            archive.dateFound = find.dateFound;
+            archive.status = isReturned;
+            archive.dateStatus = DateTime.Now;
+            DB.finds.Remove(find);
+            DB.SaveChanges();
+
+            DB.archive.Add(archive);
+            DB.SaveChanges();
+
+
         }
         public static void AddOrUpdateAppSettings(string key, string value)
         {
@@ -90,6 +131,7 @@ namespace LostAndFound.Controllers
             {
                 Console.WriteLine("Error writing app settings");
             }
+        }
         [HttpGet]
         public ActionResult Login()
         {
@@ -103,26 +145,22 @@ namespace LostAndFound.Controllers
             string encryptedPassword = Hash256.GenerateSHA256String(password);
             if (!encryptedPassword.Equals(adminPassword))
             {
-               return View();
+                return View();
             }
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public ActionResult addHeadCategory()
-        {
-            return PartialView("defineCategories");
-        }
+
         public class SettingsObject
         {
-           public string categoriesStream;
+            public string categoriesStream;
             public string locationStream;
             public string email;
             public string emailPass;
             public string password;
-            // string archive;
+
         }
 
     }
-  
+
 }

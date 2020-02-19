@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LostAndFound.eMail;
 
 namespace LostAndFound.Controllers
 {
@@ -61,12 +60,12 @@ namespace LostAndFound.Controllers
         }
         int _headCategory = 1;
 
-   
+
 
         [HttpPost]
         public ActionResult CreateFind2(HttpPostedFileBase importFile)
         {
-             
+
             var filename = $"{Guid.NewGuid().ToString()}.jpg";
             string dbFileName = "DB_" + filename;
             var fullPath = Path.Combine(ConfigurationManager.AppSettings["OriginalImageFolder"], filename);
@@ -85,11 +84,11 @@ namespace LostAndFound.Controllers
                     {
                         b.Save(fullPath);
                         importFile.InputStream.Close();
-                       
-                    } 
+
+                    }
                     b = null;
                     img.Dispose();
-                   
+
                 }
                 img = null;
             }
@@ -116,8 +115,8 @@ namespace LostAndFound.Controllers
             }
             if (specifiedImgae)
             {
-               var imageToEdit = new Bitmap(fullPath);
-               
+                var imageToEdit = new Bitmap(fullPath);
+
                 var info = GetPropertyValue("coverInfo").Split(';');
 
                 int x = int.Parse(info[2]), width = int.Parse(info[1]), y = int.Parse(info[3]), height = int.Parse(info[0]);
@@ -126,9 +125,9 @@ namespace LostAndFound.Controllers
                     for (int y1 = y; y1 < y + height; y1++)
                         imageToEdit.SetPixel(x, y1, color);
                 fullPath = Path.Combine(ConfigurationManager.AppSettings["DBImageFolder"], dbFileName);
-                   imageToEdit.Save(fullPath,ImageFormat.Jpeg);   
-                  
-                              
+                imageToEdit.Save(fullPath, ImageFormat.Jpeg);
+
+
             }
             CreateFindInDB(dbFileName);
             return RedirectToAction("Index", "Home");
