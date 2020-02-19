@@ -13,6 +13,7 @@
 <script src="~/Scripts/product-quick-view-master/js/jquery-2.1.1.js"></script>
 <script src="~/Scripts/product-quick-view-master/js/velocity.min.js"></script>
 <script src="~/Scripts/product-quick-view-master/js/main.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 <script>
     $(document).ready(function () {
@@ -187,15 +188,20 @@
                                     <p class="finder-info">@item.cellphone</p>
                                 </div>
                                 <div>
-                                    <input type="button" onclick="showPhoneInput()" value="צור קשר עם המוצא" />
+                                    <input type="button" class="contactLabel" onclick="showPhoneInput()" value="צור קשר עם המוצא" />
                                 </div>
                                 @using (Html.BeginForm("makeCall", "phoneCall", FormMethod.Post))
                                 {
                                     <div id="cellphone">
-                                        <input type="text" maxlength="10" name="phone" />
+                                        <input type="text" maxlength="10" name="phone" id="contactPhoneNumber" placeholder="הזן מספר פלאפון אישי" />
                                         <input type="text" name="findId" value="@item.id" style="display:none" />
-                                        <input type="submit" value="התקשר" />
+                                        <input class="contactLabel" type="submit" value="התקשר" />
                                     </div>
+                                }
+                                @using (Html.BeginForm("loadConfirmDelete", "deleteFind", FormMethod.Post))
+                                {
+                                    <input type="number" name="findId" value="@item.id" style="display:none" />
+                                    <button type="submit" class="transperantButton"><i class="fas fa-trash"></i></button>
                                 }
                             </div>
 

@@ -296,6 +296,39 @@ input[type=date]{
     top: -6vh;
     position: relative;
 }
+.transperantButton {
+    border: none;
+    background-color: transparent;
+}
+#wrapLoginPassword {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    top: 53px;
+}
+#containerLogin {
+    height: 25vh;
+    top: 30vh;
+    width: 30em;
+    left: 734px;
+}
+#titleLogin {
+    bottom: -57px;
+}
+#checkSubmitPassword {
+    font-size: 11vh;
+    position: relative;
+    top: 232px;
+    left: -1390px;
+    color: purple;
+    top: 344px;
+    left: -905px;
+}
+#checkSubmitPassword:hover {
+    font-size: 13vh;
+}
+}
 .text {
     margin: 4%;
     margin-top: 6%;

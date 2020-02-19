@@ -13,7 +13,7 @@
     <title></title>
     <script type="text/javascript">
         $(document).ready(function () {
-          
+
         });
 
 
@@ -24,14 +24,14 @@
     </script>
 </head>
 <body>
-    @using (Html.BeginForm("Login", "Administrator", FormMethod.Post))
+    @using (Html.BeginForm("confirmDelete", "deleteFind", FormMethod.Post))
     {
             <div class="containersAdmin" id="containerLogin" dir="rtl">
                 <h3 class="container_title" id="titleLogin">זיהוי מנהל</h3>
                 
                 <div id="wrapLoginPassword">
-                    <label class="labelSettings">הזן סיסמה:</label>
-                    <input class="input1" name="password" type="password" />
+                    <label class="labelSettings">הזן מספר טלפון אישי:</label>
+                    <input class="input1" name="finderPhoneNumber" type="password" />
                 </div>
                
             </div>

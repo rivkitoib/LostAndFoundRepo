@@ -236,6 +236,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />
+    <Content Include="Scripts\imported\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\imported\jquery-ui.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -334,10 +336,12 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="WebSite.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\deleteFindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\phoneCall.cs" />
@@ -371,6 +375,9 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Create\CreateFind.cshtml" />
+    <Content Include="Views\Create\CreateFind2.cshtml" />
+    <Content Include="Views\Create\estie.cshtml" />
+    <Content Include="Views\Home\defineCategories.cshtml" />
     <Content Include="Views\Home\home.cshtml" />
     <Content Include="Views\Home\SearchFinds.cshtml" />
     <Content Include="Scripts\product-quick-view-master\js\velocity-LICENSE.md" />
@@ -389,6 +396,11 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Views\Administrator\Unauthorized.cshtml" />
+    <Content Include="Views\deleteFind\confirmPhoneNumber.cshtml" />
+    <Content Include="Views\deleteFind\Index.cshtml" />
+    <Content Include="Views\deleteFind\confirmDelete.cshtml" />
+    <Content Include="Views\deleteFind\deleteDenyed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
