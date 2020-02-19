@@ -248,7 +248,7 @@ textarea {
     color: #874ca5;
     font-size: 30px;
     font-weight: 100;
-    margin-bottom: 41px;
+    margin-bottom: 8px;
     margin-top: -55px;
 }
 .info-data label {
@@ -275,7 +275,7 @@ textarea {
 
 .info-data {
     position: relative;
-    top: 100px;
+    top: 79px;
 }
 .container_title {
     font-size: 164%;
@@ -290,3 +290,27 @@ textarea {
 #finds-container-title {
     bottom: 1.5em ;
 }
+.contactLabel {
+    color: #874ca5;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: -50px;
+    margin-bottom: -13px;
+    margin-top: -13px;
+    background-color: transparent;
+}
+#contactPhoneNumber {
+    color: #874ca5;
+    font-size: 15px;
+    display:inline-block;
+    background-color:white;
+}
+.fas fa-trash {
+    color: #874ca5;
+    font-size: 40px;
+    position: relative !important;
+    top: 19px !important;
+}
+    .fas fa-trash:hover {
+        font-size: 45px !important;
+    }

@@ -239,6 +239,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\camera.js" />
+    <Content Include="Scripts\imported\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\imported\jquery-ui.min.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -313,9 +315,6 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="fonts\miriwin-webfont.ttf" />
-    <Content Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -338,30 +337,20 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Styles\CreateFind.css" />
-    <Content Include="Styles\CreateFind2.css" />
     <Content Include="Styles\imported\font-awesome.css" />
     <Content Include="Styles\imported\jquery-ui.min.css" />
-    <Content Include="Styles\main.css" />
     <Content Include="Styles\Self\CreateFind.css" />
-    <Content Include="Styles\util.css" />
     <Content Include="trial\email.ico" />
     <Content Include="trial\image.png" />
     <Content Include="trial\page.html" />
     <Content Include="trial\style.css" />
-    <Content Include="Views\Home\AdministratorSettings %282%29.html" />
-    <Content Include="Views\Home\AdministratorSettings.html" />
-    <Content Include="Views\jquery-1.9.1.min.js" />
-    <Content Include="Views\Jquery.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="WebSite.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\addFindController.cs" />
     <Compile Include="Controllers\AdministratorController.cs" />
+    <Compile Include="Controllers\deleteFindController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CreateController.cs" />
     <Compile Include="Controllers\phoneCall.cs" />
@@ -402,9 +391,7 @@
     <Content Include="Views\Create\CreateFind.cshtml" />
     <Content Include="Views\Create\CreateFind2.cshtml" />
     <Content Include="Views\Create\estie.cshtml" />
-    <Content Include="Views\Home\defineCategories.cshtml" />
     <Content Include="Views\Home\home.cshtml" />
-    <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\SearchFinds.cshtml" />
     <Content Include="Scripts\product-quick-view-master\js\velocity-LICENSE.md" />
     <Content Include="Scripts\product-quick-view-master\partials\_layout.scss" />
@@ -415,12 +402,10 @@
     <Content Include="Views\Administrator\Index.cshtml" />
     <Content Include="Views\Administrator\Login.cshtml" />
     <Content Include="Views\Administrator\Unauthorized.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
+    <Content Include="Views\deleteFind\confirmPhoneNumber.cshtml" />
+    <Content Include="Views\deleteFind\Index.cshtml" />
+    <Content Include="Views\deleteFind\confirmDelete.cshtml" />
+    <Content Include="Views\deleteFind\deleteDenyed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
