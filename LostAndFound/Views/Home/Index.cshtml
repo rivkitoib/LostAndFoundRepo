@@ -56,7 +56,12 @@
 
         });
             });
-   });
+    });
+
+       function showPhoneInput(){
+           debugger;
+           $("#cellphone").css("display", "block");
+        }
 </script>
 <html>
 <body>
@@ -181,6 +186,17 @@
                                     <p class="finder-info">@item.email</p>
                                     <p class="finder-info">@item.cellphone</p>
                                 </div>
+                                <div>
+                                    <input type="button" onclick="showPhoneInput()" value="צור קשר עם המוצא" />
+                                </div>
+                                @using (Html.BeginForm("makeCall", "phoneCall", FormMethod.Post))
+                                {
+                                    <div id="cellphone">
+                                        <input type="text" maxlength="10" name="phone" />
+                                        <input type="text" name="findId" value="@item.id" style="display:none" />
+                                        <input type="submit" value="התקשר" />
+                                    </div>
+                                }
                             </div>
 
                         </div>
